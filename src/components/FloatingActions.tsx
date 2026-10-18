@@ -1,11 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-/** WhatsApp arriba del botón de ClienteAI (que el widget fija en bottom:24px). Subir queda a la izquierda. */
+/**
+ * Pila de botones a la derecha, de abajo hacia arriba:
+ * ClienteAI (lo fija su widget en bottom:24px) → WhatsApp → subir.
+ */
 export function FloatingActions({ wa, msg, topLabel }: { wa: string; msg: string; topLabel: string }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const f = () => setShow(window.scrollY > 700);
+    const f = () => setShow(window.scrollY > 600);
     f();
     window.addEventListener('scroll', f, { passive: true });
     return () => window.removeEventListener('scroll', f);
@@ -18,7 +21,7 @@ export function FloatingActions({ wa, msg, topLabel }: { wa: string; msg: string
       </a>
       {show ? (
         <button type="button" aria-label={topLabel} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 left-6 z-[99998] grid size-12 place-items-center rounded-full border border-white/25 bg-ink text-white shadow-lg hover:border-gold">
+          className="fixed bottom-[160px] right-[28px] z-[99998] grid size-12 place-items-center rounded-full border border-white/30 bg-ink text-white shadow-lg hover:border-gold">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.200" strokeLinecap="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
         </button>
       ) : null}

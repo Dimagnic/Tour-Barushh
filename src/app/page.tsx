@@ -1,142 +1,194 @@
 import Link from 'next/link';
 import { Photo } from '@/components/Photo';
 import { Icon } from '@/components/Icon';
-import { wa } from '@/data/site';
+import { Carousel } from '@/components/Carousel';
+import { CurvedArrow, Leaves, Mandala, MountainMark, Stamp } from '@/components/Ornaments';
+import { site, wa } from '@/data/site';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials } from '@/data/content';
 
-const h2 = 'font-display text-4xl font-bold leading-[1.05] md:text-5xl';
-const label = 'mb-3 text-[13px] font-bold uppercase tracking-[0.22em]';
-const goldBtn = 'inline-block rounded-full bg-gold px-7 py-3.5 font-bold text-ink hover:brightness-95';
-const navyBtn = 'inline-block rounded-full bg-ink px-7 py-3.5 font-bold text-white hover:brightness-125';
+const h2 = 'font-display text-[2.5rem] font-bold leading-[1.06] md:text-[3.3rem]';
+const label = 'mb-4 text-[12px] font-medium uppercase tracking-[0.3em]';
+const gold = 'inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-[15px] font-semibold text-ink shadow-lg hover:brightness-95';
+const dark = 'inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-[15px] font-semibold text-white hover:brightness-125';
+const wrap = 'relative mx-auto max-w-[1400px] px-5 lg:px-8';
+
+/** Fondo rasgado de cada sección: se dibuja detrás del contenido para que las fotos puedan sobresalir. */
+function Torn({ children, className = '', b = false }: { children?: React.ReactNode; className?: string; b?: boolean }) {
+  return <div aria-hidden="true" className={`absolute inset-x-0 -top-5 bottom-0 overflow-hidden ${b ? 'torn-top-b' : 'torn-top'} ${className}`}>{children}</div>;
+}
 
 export default function Home() {
+  const reserve = wa('Hola, quiero reservar una experiencia con Tour Barushh.');
   return (
     <>
-      <section id="inicio" className="relative flex min-h-[620px] flex-col overflow-hidden text-white md:h-[92svh]">
-        <Photo id="plaza-valquirico" priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/55 to-ink/10" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink/85 to-transparent" />
-        <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 py-14">
-          <h1 className="max-w-2xl font-display text-5xl font-bold leading-[1.02] md:text-7xl">Más que un tour, <em className="text-gold">una experiencia</em> que se vive.</h1>
-          <p className="mt-6 max-w-lg text-lg text-white/90 md:text-xl">Conoce Puebla y sus alrededores de la mano de guías locales que aman su tierra, su historia y su gente.</p>
-          <div className="mt-8"><a href={wa('Hola, quiero reservar una experiencia con Barushh.')} target="_blank" rel="noopener noreferrer" className={goldBtn}>Reserva tu experiencia →</a></div>
-          <p className="absolute bottom-6 right-28 hidden -rotate-6 font-script text-4xl text-white/90 md:block">Descubre.<br />Vive.<br />Conecta.</p>
+      {/* PORTADA */}
+      <section id="inicio" className="relative z-0 flex min-h-[720px] flex-col overflow-hidden bg-[#031321] text-white lg:h-[100svh] lg:max-h-[880px]">
+        <div className="absolute inset-y-0 right-0 w-full lg:w-[70%] lg:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_32%)] lg:[mask-image:linear-gradient(90deg,transparent,#000_32%)]"><Photo id="vista-pueblo-iglesia" priority sizes="70vw" className="vivid object-[50%_30%]" /></div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#031321_0%,rgba(3,19,33,.93)_28%,rgba(3,19,33,.4)_56%,rgba(3,19,33,0)_80%)]" />
+        <div className="absolute inset-0 bg-ink/45 lg:hidden" />
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#031321]/85 to-transparent" />
+        <div className={`${wrap} flex w-full flex-1 flex-col justify-center pb-6 pt-32`}>
+          <h1 className="max-w-[640px] font-display text-[2.8rem] font-semibold leading-[1.08] sm:text-[3.6rem] lg:text-[4.2rem]">
+            Más que un tour,<br /><em className="text-gold">una experiencia</em><br />que se vive.
+          </h1>
+          <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-white/95">Conoce Puebla y sus alrededores de la mano de guías locales que aman su tierra, su historia y su gente.</p>
+          <div className="mt-8 flex flex-wrap items-center gap-7">
+            <a href={reserve} target="_blank" rel="noopener noreferrer" className={gold}>Reserva tu experiencia →</a>
+            {site.videoUrl ? (
+              <a href={site.videoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[13px] font-medium leading-tight">
+                <span className="grid size-12 place-items-center rounded-full border-2 border-gold text-gold"><Icon name="play" className="size-5" /></span>Conoce Tour Barushh<br />en 1 minuto
+              </a>
+            ) : (
+              <span title="Video próximamente" className="flex items-center gap-3 text-[13px] font-medium leading-tight text-white/90">
+                <span className="grid size-12 place-items-center rounded-full border-2 border-gold text-gold"><Icon name="play" className="size-5" /></span>Conoce Tour Barushh<br />en 1 minuto
+              </span>
+            )}
+          </div>
+          <div className="pointer-events-none absolute right-[13%] top-[50%] hidden -rotate-[8deg] font-script text-[2.9rem] leading-[1.05] text-white lg:block">Descubre<br />&nbsp;&nbsp;Vive<br />&nbsp;&nbsp;&nbsp;Conecta<CurvedArrow className="absolute -right-16 -top-2 w-16 text-white" /></div>
         </div>
-        <ul className="relative mx-auto mb-8 grid w-full max-w-7xl grid-cols-2 gap-5 px-5 sm:grid-cols-3 lg:grid-cols-5">
+        <ul className={`${wrap} mb-24 grid w-full grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:mb-28 lg:max-w-[1400px] lg:grid-cols-5 lg:pr-[34%]`}>
           {heroFeatures.map((f) => (
-            <li key={f.t} className="flex items-center gap-3 text-sm font-semibold leading-tight text-white/90"><Icon name={f.icon} className="size-9 shrink-0 text-gold" />{f.t}</li>
+            <li key={f.t} className="flex flex-col items-start gap-3 text-[12px] font-medium leading-snug text-white/95"><Icon name={f.icon} className="size-11 text-white" />{f.t}</li>
           ))}
         </ul>
       </section>
 
-      <section id="experiencias" className="paper torn relative z-10 text-ink">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-10 pt-20 md:grid-cols-2">
-          <div>
-            <p className={`${label} text-terra`}>Experiencias únicas</p>
-            <h2 className={h2}>Tours que cuentan historias</h2>
-            <p className="mt-5 max-w-md text-lg text-ink/80">Recorre pueblos mágicos, paisajes increíbles, tradiciones vivas y una gastronomía que enamora.</p>
-            <Link href="/#experiencias-lista" className={`${navyBtn} mt-7`}>Ver todas las experiencias →</Link>
+      {/* EXPERIENCIAS ÚNICAS */}
+      <section id="experiencias" className="relative z-10 -mt-14 overflow-x-clip pb-24 text-ink">
+        <Torn className="paper" />
+        <div aria-hidden="true" className="talavera absolute left-0 top-[330px] hidden h-44 w-14 rounded-r-[60px] opacity-95 lg:block" />
+        <div className={`${wrap} pt-24 lg:pt-28`}>
+          <div className="grid items-start gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="relative">
+              <p className={`${label} text-brown`}>Experiencias únicas</p>
+              <h2 className={h2}>Tours que<br />cuentan historias</h2>
+              <Stamp id="st1" text="EXPERIENCIAS · ÚNICAS · PUEBLA · " className="absolute right-0 top-8 hidden size-[104px] text-ink/70 xl:block"><Mandala /></Stamp>
+              <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-ink/85">Recorre pueblos mágicos, paisajes increíbles, tradiciones vivas y una gastronomía que enamora.</p>
+              <Link href="/#experiencias-lista" className={`${dark} mt-8`}>Ver todas las experiencias →</Link>
+            </div>
+            <div className="relative h-[330px] sm:h-[420px] lg:-mt-40 lg:h-[470px]">
+              <figure className="polaroid absolute left-[2%] top-[8%] w-[62%] -rotate-[4deg]"><div className="relative aspect-[4/3]"><Photo id="grupo-mural" sizes="(min-width:1024px) 30vw, 60vw" className="vivid" /></div></figure>
+              <figure className="polaroid absolute -right-[4%] top-0 w-[47%] rotate-[7deg]"><div className="relative aspect-[4/3]"><Photo id="grupo-mirador" sizes="(min-width:1024px) 24vw, 45vw" className="vivid" /></div></figure>
+              <p className="absolute -left-2 bottom-2 hidden max-w-[190px] -rotate-6 font-script text-[1.55rem] leading-tight text-ink/80 sm:block lg:-left-24 lg:bottom-4">Puebla y sus alrededores como nunca los has visto<CurvedArrow className="mt-1 w-14 text-ink/70" /></p>
+            </div>
           </div>
-          <div className="relative grid grid-cols-2 gap-4 md:block md:h-[400px]">
-            <figure className="polaroid relative -rotate-3 md:absolute md:left-0 md:top-0 md:w-[58%]"><div className="relative aspect-[4/3]"><Photo id="grupo-mural" sizes="(min-width:768px) 28vw, 45vw" /></div></figure>
-            <figure className="polaroid relative rotate-3 md:absolute md:bottom-0 md:right-0 md:w-[52%]"><div className="relative aspect-[4/3]"><Photo id="grupo-mirador" sizes="(min-width:768px) 26vw, 45vw" /></div></figure>
-            <p className="col-span-2 font-script text-2xl text-ink/70 md:absolute md:bottom-6 md:left-2 md:max-w-[200px]">Puebla y sus alrededores como nunca los has visto</p>
+          <div id="experiencias-lista" className="relative mt-14 rounded-[28px] bg-[#fbf8f0]/90 p-4 shadow-[0_12px_40px_rgba(60,40,10,.14)] sm:p-5">
+            <Carousel label="Experiencias" basis="basis-[82%] sm:basis-[calc(50%-10px)] lg:basis-[calc(25%-15px)]" arrowClass="top-[34%]">
+              {experiences.map((e) => (
+                <article key={e.title} className="relative flex h-full flex-col">
+                  <div className="relative">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-t-2xl"><Photo id={e.photo} thumb sizes="(min-width:1024px) 22vw, 80vw" className="vivid" /></div>
+                    <span className="absolute -bottom-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-gold/60 bg-[#fffdf8] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] shadow-sm"><Icon name="pin" className="size-3.5" />{e.place}</span>
+                  </div>
+                  <div className="flex flex-1 flex-col rounded-b-2xl bg-[#fffdf8] p-5 pt-8 shadow-sm">
+                    <h3 className="font-display text-[1.25rem] font-bold leading-snug">{e.title}</h3>
+                    <p className="mt-2 flex-1 text-[14px] leading-relaxed text-ink/70">{e.text}</p>
+                    <a href={wa(`Hola, quiero información sobre: ${e.title}.`)} target="_blank" rel="noopener noreferrer" className="mt-4 w-fit rounded-full border border-brown/50 px-5 py-2 text-[13px] font-medium hover:border-ink">Ver más →</a>
+                  </div>
+                </article>
+              ))}
+            </Carousel>
           </div>
-        </div>
-        <div id="experiencias-lista" className="mx-auto grid max-w-7xl gap-5 px-5 pb-24 sm:grid-cols-2 lg:grid-cols-4">
-          {experiences.map((e) => (
-            <article key={e.title} className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md">
-              <div className="relative aspect-[4/3]"><Photo id={e.photo} thumb sizes="(min-width:1024px) 22vw, (min-width:640px) 45vw, 100vw" /></div>
-              <div className="flex flex-1 flex-col p-5">
-                <p className="-mt-9 mb-3 w-fit rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink shadow">{e.place}</p>
-                <h3 className="font-display text-2xl font-bold leading-tight">{e.title}</h3>
-                <p className="mt-2 flex-1 text-ink/75">{e.text}</p>
-                <a href={wa(`Hola, quiero información sobre: ${e.title}.`)} target="_blank" rel="noopener noreferrer" className="mt-4 w-fit rounded-full border border-ink/30 px-5 py-2 text-sm font-bold hover:border-cobalt hover:text-cobalt">Ver más →</a>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 
-      <section className="torn relative z-20 overflow-hidden bg-ink text-white">
-        <Photo id="cascada-mirador" sizes="100vw" className="opacity-20" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 md:grid-cols-2">
-          <div>
+      {/* VIVE LA EXPERIENCIA */}
+      <section className="relative z-20 -mt-12 overflow-x-clip text-white">
+        <Torn b className="bg-[#06182a]">
+          <Photo id="cascada-lejana" sizes="100vw" className="vivid object-[50%_30%]" />
+          <div className="absolute inset-0 bg-[#0b4a7a]/45 mix-blend-color" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,19,33,.93),rgba(4,28,46,.55)_50%,rgba(4,28,46,.12))]" />
+        </Torn>
+        <div className={`${wrap} grid items-center gap-12 pb-24 pt-28 lg:grid-cols-[1fr_1.05fr]`}>
+          <div className="relative">
             <p className={`${label} text-gold`}>Vive la experiencia</p>
-            <h2 className={h2}>Lugares increíbles, historias inolvidables</h2>
-            <p className="mt-5 max-w-md text-lg text-white/85">Te llevamos a descubrir la riqueza cultural, natural y gastronómica de nuestra región, con experiencias diseñadas para conectar de verdad con cada destino.</p>
-            <a href={wa('Hola, quiero reservar un tour con Barushh.')} target="_blank" rel="noopener noreferrer" className={`${goldBtn} mt-7`}>Reserva tu tour →</a>
-            <ul className="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4">
-              {living.map((l) => <li key={l.t} className="flex flex-col items-start gap-2 text-sm font-semibold"><Icon name={l.icon} className="size-9 text-gold" />{l.t}</li>)}
+            <h2 className={h2}>Lugares increíbles,<br />historias inolvidables</h2>
+            <p className="mt-6 max-w-[470px] text-[17px] leading-relaxed text-white/90">Te llevamos a descubrir la riqueza cultural, natural y gastronómica de nuestra región, con experiencias diseñadas para conectar de verdad con cada destino.</p>
+            <a href={wa('Hola, quiero reservar un tour con Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${gold} mt-8`}>Reserva tu tour →</a>
+            <ul className="mt-10 grid max-w-[560px] grid-cols-2 gap-6 sm:grid-cols-4">
+              {living.map((l) => <li key={l.t} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
             </ul>
           </div>
           <div className="relative">
-            <figure className="polaroid rotate-2"><div className="relative aspect-[4/3]"><Photo id="calle-pueblo-grupo" sizes="(min-width:768px) 45vw, 100vw" /></div></figure>
-            <p className="mt-4 -rotate-3 font-script text-3xl text-white/90">Viaja en buena compañía</p>
+            <CurvedArrow className="absolute -left-14 -top-14 hidden w-24 -rotate-12 text-gold lg:block" />
+            <figure className="polaroid -rotate-[3deg] lg:-mr-16"><div className="relative aspect-[4/3]"><Photo id="calle-pueblo-grupo" sizes="(min-width:1024px) 52vw, 100vw" className="vivid" /></div></figure>
+            <p className="absolute -left-4 bottom-10 hidden max-w-[150px] -rotate-6 font-script text-[1.6rem] leading-tight text-white lg:block">Viaja en buena compañía</p>
           </div>
         </div>
       </section>
 
-      <section id="nosotros" className="paper torn relative z-30 text-ink">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 md:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl"><Photo id="iglesia-barroca" sizes="(min-width:768px) 50vw, 100vw" /></div>
-          <div>
-            <p className={`${label} text-terra`}>Nuestra esencia</p>
-            <h2 className={h2}>Personas que hacen la diferencia</h2>
-            <p className="mt-5 max-w-lg text-lg text-ink/80">Somos un equipo de guías apasionados por compartir la historia, la cultura y la belleza de Puebla. Cada tour está pensado para que vivas una experiencia auténtica, segura y llena de momentos especiales.</p>
-            <a href={wa('Hola, me gustaría hablar con un guía de Barushh.')} target="_blank" rel="noopener noreferrer" className={`${navyBtn} mt-7`}>Habla con un guía →</a>
-            <ul className="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4">
-              {essence.map((l) => <li key={l.t} className="flex flex-col items-start gap-2 text-sm font-semibold"><Icon name={l.icon} className="size-9 text-terra" />{l.t}</li>)}
+      {/* NUESTRA ESENCIA */}
+      <section id="nosotros" className="relative z-30 -mt-12 overflow-x-clip text-ink">
+        <Torn className="paper" />
+        <div className="relative grid items-center lg:grid-cols-[1fr_1fr]">
+          <div className="relative h-[380px] sm:h-[480px] lg:h-[620px]"><div className="torn-photo absolute inset-0 top-10 overflow-hidden"><Photo id="iglesia-talavera" sizes="(min-width:1024px) 50vw, 100vw" className="vivid object-[50%_30%]" /></div></div>
+          <div className="relative max-w-[680px] px-5 py-20 lg:px-14">
+            <Stamp id="st2" text="CULTURA · NATURALEZA · GASTRONOMÍA · GENTE · " className="absolute right-6 top-10 hidden size-[118px] text-ink/45 xl:block"><MountainMark /></Stamp>
+            <Leaves className="absolute -right-5 bottom-24 hidden h-44 opacity-80 lg:block" />
+            <p className={`${label} text-brown`}>Nuestra esencia</p>
+            <h2 className={h2}>Personas que<br />hacen la diferencia</h2>
+            <p className="mt-6 max-w-[500px] text-[17px] leading-relaxed text-ink/75">Somos un equipo de guías apasionados por compartir <span className="text-ink">la historia, la cultura y la belleza de Puebla.</span> Cada tour está pensado para que vivas una experiencia auténtica, segura y llena de momentos especiales.</p>
+            <a href={wa('Hola, quisiera conocer más sobre Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${dark} mt-8`}>Conoce nuestra historia →</a>
+            <ul className="mt-10 grid max-w-[560px] grid-cols-2 gap-6 sm:grid-cols-4">
+              {essence.map((l) => <li key={l.t} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
             </ul>
           </div>
         </div>
       </section>
 
-      <section id="galeria" className="torn relative z-40 bg-ink text-white">
-        <div className="mx-auto max-w-7xl px-5 py-20">
-          <div className="flex flex-wrap items-end gap-x-6">
-            <h2 className={h2}>Momentos que se quedan</h2>
-            <p className="-rotate-2 font-script text-3xl text-gold">Experiencias reales</p>
+      {/* GALERÍA */}
+      <section id="galeria" className="relative z-40 -mt-10 overflow-x-clip text-white">
+        <Torn b className="bg-[#06182a]">
+          <Photo id="cascada-lejana" sizes="100vw" className="vivid object-[50%_70%]" />
+          <div className="absolute inset-0 bg-[#0b4a7a]/45 mix-blend-color" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,19,33,.5),rgba(3,19,33,.82))]" />
+        </Torn>
+        <div className={`${wrap} pb-24 pt-24`}>
+          <p className={`${label} text-gold`}>Galería</p>
+          <div className="flex flex-wrap items-end gap-x-10">
+            <h2 className={h2}>Momentos<br />que se quedan</h2>
+            <p className="mb-2 -rotate-6 font-script text-[1.8rem] leading-tight text-white">Experiencias<br />reales<CurvedArrow flip className="ml-2 inline-block w-12 text-gold" /></p>
           </div>
-          <ul tabIndex={0} aria-label="Galería de fotos, desplázate horizontalmente" className="mt-10 flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-color:#e8b23a_transparent]">
-            {gallery.map((id) => (
-              <li key={id} className="relative aspect-[4/5] w-64 shrink-0 snap-start overflow-hidden rounded-xl sm:w-72"><Photo id={id} thumb sizes="288px" /></li>
-            ))}
-          </ul>
+          <div className="mt-10">
+            <Carousel label="Galería de fotos" basis="basis-[82%] sm:basis-[calc(50%-10px)] lg:basis-[calc(25%-15px)]" arrowClass="top-1/2">
+              {gallery.map((id) => <div key={id} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/20"><Photo id={id} thumb sizes="(min-width:1024px) 24vw, 80vw" className="vivid" /></div>)}
+            </Carousel>
+          </div>
         </div>
       </section>
 
-      <section id="testimonios" className="paper torn relative z-50 text-ink">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-24 lg:grid-cols-[1fr_2.4fr]">
+      {/* TESTIMONIOS */}
+      <section id="testimonios" className="relative z-50 -mt-10 text-ink">
+        <Torn b className="paper" />
+        <div className={`${wrap} grid items-center gap-10 pb-24 pt-28 lg:grid-cols-[1fr_2.6fr]`}>
           <div>
-            <p className={`${label} text-terra`}>Testimonios</p>
-            <h2 className={h2}>Viajeros que viven y recomiendan</h2>
+            <p className={`${label} text-brown`}>Testimonios</p>
+            <h2 className={h2}>Viajeros que<br />viven y recomiendan</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {testimonials.map((t) => (
-              <figure key={t.name} className="flex flex-col rounded-2xl bg-white p-6 shadow-md">
-                <p aria-label="5 de 5 estrellas" className="text-xl tracking-widest text-gold">★★★★★</p>
-                <blockquote className="mt-3 flex-1 text-ink/85">“{t.text}”</blockquote>
-                <figcaption className="mt-5 flex items-center gap-3 font-semibold"><span aria-hidden="true" className="grid size-10 place-items-center rounded-full bg-cobalt text-white">{t.name[0]}</span>{t.name}</figcaption>
+              <figure key={t.name} className="flex flex-col rounded-3xl bg-[#fffdf8] p-6 shadow-[0_8px_26px_rgba(60,40,10,.1)]">
+                <p aria-label="5 de 5 estrellas" className="text-[17px] tracking-[0.2em] text-gold">★★★★★</p>
+                <blockquote className="mt-4 flex-1 text-[14px] leading-relaxed text-ink/75">“{t.text}”</blockquote>
+                <figcaption className="mt-5 flex items-center gap-3 text-[13px] text-ink/70"><span aria-hidden="true" className="grid size-10 place-items-center rounded-full bg-cobalt font-semibold text-white">{t.name[0]}</span>{t.name}</figcaption>
               </figure>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contacto" className="torn relative z-[60] bg-ink text-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-[1.3fr_1fr_1fr]">
-          <div>
-            <h2 className={h2}>¿Listo para vivir esta experiencia?</h2>
-            <p className="mt-4 max-w-md text-lg text-white/85">Cuéntanos qué tipo de tour te interesa y te ayudamos a planear un viaje inolvidable.</p>
-            <a href={wa('Hola, quisiera cotizar un tour con Barushh.')} target="_blank" rel="noopener noreferrer" className={`${goldBtn} mt-7`}>Cotiza por WhatsApp →</a>
-          </div>
-          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl lg:block"><Photo id="vista-pueblo-iglesia" thumb sizes="25vw" /></div>
-          <ul className="space-y-4">
-            {ctaList.map((c) => <li key={c.t} className="flex items-center gap-3 font-semibold"><Icon name={c.icon} className="size-7 shrink-0 text-gold" />{c.t}</li>)}
-          </ul>
+      {/* LLAMADA FINAL */}
+      <section id="contacto" className="relative z-[60] grid bg-navy text-white lg:grid-cols-[120px_1.45fr_0.9fr_1.05fr]">
+        <div aria-hidden="true" className="talavera h-16 lg:h-auto" />
+        <div className="px-6 py-14 lg:px-12 lg:py-16">
+          <h2 className="font-display text-[2.2rem] font-semibold leading-tight md:text-[2.7rem]">¿Listo para vivir<br />esta experiencia?</h2>
+          <p className="mt-4 max-w-[420px] text-[15px] text-white/85">Cuéntanos qué tipo de tour te interesa y te ayudamos a planear un viaje inolvidable.</p>
+          <a href={wa('Hola, quisiera cotizar un tour con Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${gold} mt-7`}><Icon name="whatsapp" className="size-6" />Cotiza por WhatsApp →</a>
         </div>
-        <div aria-hidden="true" className="tile h-4" />
+        <div className="relative min-h-[260px]"><Photo id="vista-pueblo-iglesia" thumb sizes="(min-width:1024px) 25vw, 100vw" className="vivid object-[50%_72%]" /></div>
+        <ul className="flex flex-col justify-center gap-6 px-6 py-12 lg:px-10">
+          {ctaList.map((c) => <li key={c.t} className="flex items-center gap-4 text-[14px] font-medium"><Icon name={c.icon} className="size-9 shrink-0" />{c.t}</li>)}
+        </ul>
       </section>
     </>
   );

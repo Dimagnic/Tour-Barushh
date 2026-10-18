@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import '@fontsource/cormorant-garamond/600.css';
-import '@fontsource/cormorant-garamond/700.css';
-import '@fontsource/cormorant-garamond/600-italic.css';
+import '@fontsource/playfair-display/600.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/playfair-display/600-italic.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
 import '@fontsource/caveat/500.css';
-import '@fontsource-variable/source-sans-3';
 import './globals.css';
 import { site, wa } from '@/data/site';
 import { Header } from '@/components/Header';
@@ -14,10 +16,10 @@ import { FloatingActions } from '@/components/FloatingActions';
 const description = 'Conoce Puebla y sus alrededores de la mano de guías locales: Cholula, pueblos mágicos, tours para grupos y transporte seguro.';
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'Barushh Guías de Turismo | Tours en Puebla, Cholula y pueblos mágicos', template: `%s | ${site.name}` },
+  title: { default: 'Tour Barushh | Guías de turismo en Puebla, Cholula y pueblos mágicos', template: `%s | ${site.name}` },
   description,
   alternates: { canonical: '/' },
-  openGraph: { title: 'Barushh Guías de Turismo', description, type: 'website', siteName: site.name, locale: 'es_MX', images: ['/brand/logo.webp'] },
+  openGraph: { title: 'Tour Barushh, guías de turismo en Puebla', description, type: 'website', siteName: site.name, locale: 'es_MX', images: ['/brand/logo.webp'] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
