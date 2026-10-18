@@ -1,0 +1,482 @@
+[
+ {
+  "id": "plaza-valquirico",
+  "cat": "destinos",
+  "src": "/photos/destinos/plaza-valquirico.webp",
+  "thumb": "/photos/destinos/plaza-valquirico-thumb.webp",
+  "w": 2400,
+  "h": 1348,
+  "es": "Plaza con el letrero de Valquirico",
+  "en": "Plaza with the Valquirico sign"
+ },
+ {
+  "id": "van-pasajeros",
+  "cat": "transporte",
+  "src": "/photos/transporte/van-pasajeros.webp",
+  "thumb": "/photos/transporte/van-pasajeros-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Pasajeros dentro de la camioneta de turismo",
+  "en": "Passengers inside the tour van"
+ },
+ {
+  "id": "guia-con-viajera",
+  "cat": "guia",
+  "src": "/photos/guia/guia-con-viajera.webp",
+  "thumb": "/photos/guia/guia-con-viajera-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas con una viajera",
+  "en": "Tour guide with a traveler"
+ },
+ {
+  "id": "edificio-balcon",
+  "cat": "cultura",
+  "src": "/photos/cultura/edificio-balcon.webp",
+  "thumb": "/photos/cultura/edificio-balcon-thumb.webp",
+  "w": 1796,
+  "h": 2400,
+  "es": "Edificio de ladrillo con balcón",
+  "en": "Brick building with a balcony"
+ },
+ {
+  "id": "calle-empedrada",
+  "cat": "destinos",
+  "src": "/photos/destinos/calle-empedrada.webp",
+  "thumb": "/photos/destinos/calle-empedrada-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Calle empedrada con visitantes en un pueblo de Puebla",
+  "en": "Cobblestone street with visitors in a Puebla town"
+ },
+ {
+  "id": "grupo-mirador",
+  "cat": "grupos",
+  "src": "/photos/grupos/grupo-mirador.webp",
+  "thumb": "/photos/grupos/grupo-mirador-thumb.webp",
+  "w": 2400,
+  "h": 1350,
+  "es": "Grupo de viajeros en un mirador de la sierra",
+  "en": "Group of travelers at a mountain viewpoint"
+ },
+ {
+  "id": "grupo-mural",
+  "cat": "grupos",
+  "src": "/photos/grupos/grupo-mural.webp",
+  "thumb": "/photos/grupos/grupo-mural-thumb.webp",
+  "w": 2400,
+  "h": 1350,
+  "es": "Grupo de viajeros frente a un mural",
+  "en": "Group of travelers in front of a mural"
+ },
+ {
+  "id": "guia-calle-empedrada",
+  "cat": "guia",
+  "src": "/photos/guia/guia-calle-empedrada.webp",
+  "thumb": "/photos/guia/guia-calle-empedrada-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en una calle empedrada",
+  "en": "Tour guide on a cobblestone street"
+ },
+ {
+  "id": "cascada-doble-1",
+  "cat": "naturaleza",
+  "src": "/photos/naturaleza/cascada-doble-1.webp",
+  "thumb": "/photos/naturaleza/cascada-doble-1-thumb.webp",
+  "w": 1796,
+  "h": 2400,
+  "es": "Cascada doble con visitantes",
+  "en": "Twin waterfall with visitors"
+ },
+ {
+  "id": "cascada-doble-2",
+  "cat": "naturaleza",
+  "src": "/photos/naturaleza/cascada-doble-2.webp",
+  "thumb": "/photos/naturaleza/cascada-doble-2-thumb.webp",
+  "w": 1796,
+  "h": 2400,
+  "es": "Visitantes frente a una cascada doble",
+  "en": "Visitors facing a twin waterfall"
+ },
+ {
+  "id": "cascada-mirador",
+  "cat": "naturaleza",
+  "src": "/photos/naturaleza/cascada-mirador.webp",
+  "thumb": "/photos/naturaleza/cascada-mirador-thumb.webp",
+  "w": 1796,
+  "h": 2400,
+  "es": "Cascada alta vista desde el mirador",
+  "en": "Tall waterfall seen from the viewpoint"
+ },
+ {
+  "id": "guia-calle-colonial",
+  "cat": "guia",
+  "src": "/photos/guia/guia-calle-colonial.webp",
+  "thumb": "/photos/guia/guia-calle-colonial-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en una calle colonial",
+  "en": "Tour guide on a colonial street"
+ },
+ {
+  "id": "edificio-ladrillo-rojo",
+  "cat": "cultura",
+  "src": "/photos/cultura/edificio-ladrillo-rojo.webp",
+  "thumb": "/photos/cultura/edificio-ladrillo-rojo-thumb.webp",
+  "w": 1796,
+  "h": 2400,
+  "es": "Edificio de ladrillo rojo y cantera blanca",
+  "en": "Red brick and white stone building"
+ },
+ {
+  "id": "van-guia",
+  "cat": "transporte",
+  "src": "/photos/transporte/van-guia.webp",
+  "thumb": "/photos/transporte/van-guia-thumb.webp",
+  "w": 1350,
+  "h": 2400,
+  "es": "Guía con pasajeros en la camioneta",
+  "en": "Guide with passengers in the van"
+ },
+ {
+  "id": "comida-grupo",
+  "cat": "gastronomia",
+  "src": "/photos/gastronomia/comida-grupo.webp",
+  "thumb": "/photos/gastronomia/comida-grupo-thumb.webp",
+  "w": 1349,
+  "h": 2400,
+  "es": "Grupo de viajeros comiendo en un restaurante",
+  "en": "Group of travelers having lunch"
+ },
+ {
+  "id": "jardin-reloj-floral",
+  "cat": "destinos",
+  "src": "/photos/destinos/jardin-reloj-floral.webp",
+  "thumb": "/photos/destinos/jardin-reloj-floral-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Grupo de viajeros frente a un reloj floral",
+  "en": "Travelers in front of a floral clock"
+ },
+ {
+  "id": "catedral-puebla",
+  "cat": "cultura",
+  "src": "/photos/cultura/catedral-puebla.webp",
+  "thumb": "/photos/cultura/catedral-puebla-thumb.webp",
+  "w": 798,
+  "h": 1002,
+  "es": "Catedral de Puebla y sus dos torres",
+  "en": "Puebla Cathedral and its two towers"
+ },
+ {
+  "id": "guia-credencial",
+  "cat": "guia",
+  "src": "/photos/guia/guia-credencial.webp",
+  "thumb": "/photos/guia/guia-credencial-thumb.webp",
+  "w": 1350,
+  "h": 2400,
+  "es": "Guía de turistas con su credencial",
+  "en": "Tour guide with his ID badge"
+ },
+ {
+  "id": "grupo-muro-rojo-1",
+  "cat": "grupos",
+  "src": "/photos/grupos/grupo-muro-rojo-1.webp",
+  "thumb": "/photos/grupos/grupo-muro-rojo-1-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Viajeros escuchando a su guía",
+  "en": "Travelers listening to their guide"
+ },
+ {
+  "id": "grupo-muro-rojo-2",
+  "cat": "grupos",
+  "src": "/photos/grupos/grupo-muro-rojo-2.webp",
+  "thumb": "/photos/grupos/grupo-muro-rojo-2-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Grupo de viajeros en el centro histórico",
+  "en": "Group of travelers in the historic center"
+ },
+ {
+  "id": "nido-mirador",
+  "cat": "naturaleza",
+  "src": "/photos/naturaleza/nido-mirador.webp",
+  "thumb": "/photos/naturaleza/nido-mirador-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Nido gigante en un mirador de la sierra",
+  "en": "Giant nest at a mountain viewpoint"
+ },
+ {
+  "id": "puesto-textiles",
+  "cat": "artesanias",
+  "src": "/photos/artesanias/puesto-textiles.webp",
+  "thumb": "/photos/artesanias/puesto-textiles-thumb.webp",
+  "w": 1349,
+  "h": 2400,
+  "es": "Puesto de textiles artesanales",
+  "en": "Handmade textile stall"
+ },
+ {
+  "id": "guia-restaurante",
+  "cat": "guia",
+  "src": "/photos/guia/guia-restaurante.webp",
+  "thumb": "/photos/guia/guia-restaurante-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en un restaurante",
+  "en": "Tour guide at a restaurant"
+ },
+ {
+  "id": "iglesia-barroca",
+  "cat": "cultura",
+  "src": "/photos/cultura/iglesia-barroca.webp",
+  "thumb": "/photos/cultura/iglesia-barroca-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Fachada de iglesia barroca con visitantes",
+  "en": "Baroque church facade with visitors"
+ },
+ {
+  "id": "chiles-nogada",
+  "cat": "gastronomia",
+  "src": "/photos/gastronomia/chiles-nogada.webp",
+  "thumb": "/photos/gastronomia/chiles-nogada-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Chiles en nogada con una pirámide al fondo",
+  "en": "Chiles en nogada with a pyramid in the background"
+ },
+ {
+  "id": "mesa-tradicional",
+  "cat": "gastronomia",
+  "src": "/photos/gastronomia/mesa-tradicional.webp",
+  "thumb": "/photos/gastronomia/mesa-tradicional-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Mesa de cocina tradicional con viajeros",
+  "en": "Traditional table with travelers"
+ },
+ {
+  "id": "vista-pueblo-iglesia",
+  "cat": "destinos",
+  "src": "/photos/destinos/vista-pueblo-iglesia.webp",
+  "thumb": "/photos/destinos/vista-pueblo-iglesia-thumb.webp",
+  "w": 1080,
+  "h": 1440,
+  "es": "Vista de un pueblo de montaña con su iglesia",
+  "en": "View of a mountain town and its church"
+ },
+ {
+  "id": "guia-montana",
+  "cat": "guia",
+  "src": "/photos/guia/guia-montana.webp",
+  "thumb": "/photos/guia/guia-montana-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas con la sierra de fondo",
+  "en": "Tour guide with the mountains behind"
+ },
+ {
+  "id": "maqueta-catedral",
+  "cat": "cultura",
+  "src": "/photos/cultura/maqueta-catedral.webp",
+  "thumb": "/photos/cultura/maqueta-catedral-thumb.webp",
+  "w": 1700,
+  "h": 1000,
+  "es": "Maqueta de una catedral en un parque",
+  "en": "Cathedral scale model in a park"
+ },
+ {
+  "id": "tranvia-guia",
+  "cat": "transporte",
+  "src": "/photos/transporte/tranvia-guia.webp",
+  "thumb": "/photos/transporte/tranvia-guia-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía con pasajeros en un tranvía turístico",
+  "en": "Guide with passengers on a tourist tram"
+ },
+ {
+  "id": "letrero-zacatlan",
+  "cat": "destinos",
+  "src": "/photos/destinos/letrero-zacatlan.webp",
+  "thumb": "/photos/destinos/letrero-zacatlan-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Grupo de viajeros ante las letras de Zacatlán",
+  "en": "Travelers at the Zacatlán letters"
+ },
+ {
+  "id": "tranvia-interior",
+  "cat": "transporte",
+  "src": "/photos/transporte/tranvia-interior.webp",
+  "thumb": "/photos/transporte/tranvia-interior-thumb.webp",
+  "w": 2400,
+  "h": 1349,
+  "es": "Interior de un tranvía turístico",
+  "en": "Inside a tourist tram"
+ },
+ {
+  "id": "letrero-guexcomate",
+  "cat": "destinos",
+  "src": "/photos/destinos/letrero-guexcomate.webp",
+  "thumb": "/photos/destinos/letrero-guexcomate-thumb.webp",
+  "w": 2400,
+  "h": 1366,
+  "es": "Letrero de Güexcomate frente al cerro",
+  "en": "Güexcomate sign in front of the hill"
+ },
+ {
+  "id": "reloj-iglesia",
+  "cat": "cultura",
+  "src": "/photos/cultura/reloj-iglesia.webp",
+  "thumb": "/photos/cultura/reloj-iglesia-thumb.webp",
+  "w": 1280,
+  "h": 1280,
+  "es": "Torre del reloj e iglesia de dos torres",
+  "en": "Clock tower and twin-tower church"
+ },
+ {
+  "id": "calle-ladrillo",
+  "cat": "destinos",
+  "src": "/photos/destinos/calle-ladrillo.webp",
+  "thumb": "/photos/destinos/calle-ladrillo-thumb.webp",
+  "w": 1350,
+  "h": 2400,
+  "es": "Calle de ladrillo con un músico y visitantes",
+  "en": "Brick street with a musician and visitors"
+ },
+ {
+  "id": "iglesia-talavera",
+  "cat": "cultura",
+  "src": "/photos/cultura/iglesia-talavera.webp",
+  "thumb": "/photos/cultura/iglesia-talavera-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Iglesia con fachada de azulejo y grupo de viajeros",
+  "en": "Tiled church facade with a group of travelers"
+ },
+ {
+  "id": "puente-luces",
+  "cat": "destinos",
+  "src": "/photos/destinos/puente-luces.webp",
+  "thumb": "/photos/destinos/puente-luces-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Puente de madera iluminado con luces en forma de corazón",
+  "en": "Wooden bridge with heart-shaped lights"
+ },
+ {
+  "id": "bus-turistico",
+  "cat": "transporte",
+  "src": "/photos/transporte/bus-turistico.webp",
+  "thumb": "/photos/transporte/bus-turistico-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Autobús turístico rojo de dos pisos",
+  "en": "Red double-decker tourist bus"
+ },
+ {
+  "id": "calle-pueblo-grupo",
+  "cat": "destinos",
+  "src": "/photos/destinos/calle-pueblo-grupo.webp",
+  "thumb": "/photos/destinos/calle-pueblo-grupo-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Grupo de viajeros en una calle de pueblo",
+  "en": "Travelers on a town street"
+ },
+ {
+  "id": "guia-retrato",
+  "cat": "guia",
+  "src": "/photos/guia/guia-retrato.webp",
+  "thumb": "/photos/guia/guia-retrato-thumb.webp",
+  "w": 1350,
+  "h": 2400,
+  "es": "Retrato del guía de turistas",
+  "en": "Portrait of the tour guide"
+ },
+ {
+  "id": "grupo-muro-rojo-3",
+  "cat": "grupos",
+  "src": "/photos/grupos/grupo-muro-rojo-3.webp",
+  "thumb": "/photos/grupos/grupo-muro-rojo-3-thumb.webp",
+  "w": 2400,
+  "h": 1800,
+  "es": "Viajeros durante un recorrido a pie",
+  "en": "Travelers on a walking tour"
+ },
+ {
+  "id": "calle-rueda-fortuna",
+  "cat": "destinos",
+  "src": "/photos/destinos/calle-rueda-fortuna.webp",
+  "thumb": "/photos/destinos/calle-rueda-fortuna-thumb.webp",
+  "w": 1350,
+  "h": 2400,
+  "es": "Calle empedrada con una rueda de la fortuna al fondo",
+  "en": "Cobblestone street with a ferris wheel behind"
+ },
+ {
+  "id": "cascada-lejana",
+  "cat": "naturaleza",
+  "src": "/photos/naturaleza/cascada-lejana.webp",
+  "thumb": "/photos/naturaleza/cascada-lejana-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Cascada entre la vegetación de la sierra",
+  "en": "Waterfall among the mountain forest"
+ },
+ {
+  "id": "guia-mirador-1",
+  "cat": "guia",
+  "src": "/photos/guia/guia-mirador-1.webp",
+  "thumb": "/photos/guia/guia-mirador-1-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en un mirador",
+  "en": "Tour guide at a viewpoint"
+ },
+ {
+  "id": "guia-mirador-2",
+  "cat": "guia",
+  "src": "/photos/guia/guia-mirador-2.webp",
+  "thumb": "/photos/guia/guia-mirador-2-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en un mirador",
+  "en": "Tour guide at a viewpoint"
+ },
+ {
+  "id": "tranvia-pasajeros-1",
+  "cat": "transporte",
+  "src": "/photos/transporte/tranvia-pasajeros-1.webp",
+  "thumb": "/photos/transporte/tranvia-pasajeros-1-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Viajeros a bordo de un tranvía turístico",
+  "en": "Travelers on a tourist tram"
+ },
+ {
+  "id": "tranvia-pasajeros-2",
+  "cat": "transporte",
+  "src": "/photos/transporte/tranvia-pasajeros-2.webp",
+  "thumb": "/photos/transporte/tranvia-pasajeros-2-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Viajeros a bordo de un tranvía turístico",
+  "en": "Travelers on a tourist tram"
+ },
+ {
+  "id": "guia-mirador-3",
+  "cat": "guia",
+  "src": "/photos/guia/guia-mirador-3.webp",
+  "thumb": "/photos/guia/guia-mirador-3-thumb.webp",
+  "w": 1800,
+  "h": 2400,
+  "es": "Guía de turistas en un mirador",
+  "en": "Tour guide at a viewpoint"
+ }
+]

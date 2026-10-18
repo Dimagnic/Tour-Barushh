@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b1f3a;
+  --color-cobalt: #1f4fa3;
+  --color-gold: #e8b23a;
+  --color-cream: #fbf8f2;
+  --color-paper: #f6eedd;
+  --color-terra: #b4532f;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Caveat", cursive;
+  --font-sans: "Source Sans 3 Variable", "Source Sans 3", system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--color-ink); color: var(--color-ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.6; }
+:focus-visible { outline: 3px solid var(--color-gold); outline-offset: 2px; }
+summary::-webkit-details-marker { display: none; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* Papel y borde rasgado de las secciones */
+.paper { background-color: var(--color-paper); background-image: radial-gradient(rgba(120, 90, 40, 0.09) 1px, transparent 1px); background-size: 18px 18px; }
+.torn { margin-top: -14px; padding-top: 14px; clip-path: polygon(0% 14px, 4% 5px, 8% 12px, 13% 3px, 18% 11px, 24% 4px, 30% 13px, 36% 5px, 42% 12px, 48% 3px, 55% 11px, 61% 5px, 67% 13px, 73% 4px, 80% 12px, 86% 5px, 92% 11px, 96% 4px, 100% 10px, 100% 100%, 0 100%); }
+.tile { background: conic-gradient(from 45deg at 50% 50%, #1f4fa3 0 25%, #eef3fc 0 50%, #1f4fa3 0 75%, #eef3fc 0) 0 0 / 44px 44px; }
+.polaroid { background: #fff; padding: 8px 8px 22px; box-shadow: 0 10px 28px rgba(11, 31, 58, 0.28); }
+
+/* La ventana del chat de ClienteAI se abre por encima del botón de WhatsApp para no taparlo. */
+#cai-box { bottom: 160px !important; max-width: calc(100vw - 32px); }
