@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className="max-w-2xl font-display text-5xl font-bold leading-[1.02] md:text-7xl">Más que un tour, <em className="text-gold">una experiencia</em> que se vive.</h1>
           <p className="mt-6 max-w-lg text-lg text-white/90 md:text-xl">Conoce Puebla y sus alrededores de la mano de guías locales que aman su tierra, su historia y su gente.</p>
           <div className="mt-8"><a href={wa('Hola, quiero reservar una experiencia con Barushh.')} target="_blank" rel="noopener noreferrer" className={goldBtn}>Reserva tu experiencia →</a></div>
-          <p className="absolute bottom-6 right-5 hidden -rotate-6 font-script text-4xl text-white/90 md:block">Descubre.<br />Vive.<br />Conecta.</p>
+          <p className="absolute bottom-6 right-28 hidden -rotate-6 font-script text-4xl text-white/90 md:block">Descubre.<br />Vive.<br />Conecta.</p>
         </div>
         <ul className="relative mx-auto mb-8 grid w-full max-w-7xl grid-cols-2 gap-5 px-5 sm:grid-cols-3 lg:grid-cols-5">
           {heroFeatures.map((f) => (
