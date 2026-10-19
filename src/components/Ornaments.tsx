@@ -4,7 +4,7 @@ export function Stamp({ text, id, className = '', children }: { text: string; id
     <svg viewBox="0 0 140 140" className={className} aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.200">
       <defs><path id={id} d="M70 70m-54 0a54 54 0 1 1 108 0a54 54 0 1 1-108 0" /></defs>
       <circle cx="70" cy="70" r="66" /><circle cx="70" cy="70" r="41" />
-      <text fontSize="9.500" letterSpacing="3.200" fill="currentColor" stroke="none" fontFamily="Poppins, sans-serif"><textPath href={`#${id}`}>{text}</textPath></text>
+      <text fontSize="9.500" letterSpacing="3.200" fill="currentColor" stroke="none" fontFamily="DM Sans, sans-serif"><textPath href={`#${id}`}>{text}</textPath></text>
       {children}
     </svg>
   );

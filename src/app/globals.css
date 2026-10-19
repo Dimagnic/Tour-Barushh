@@ -11,7 +11,7 @@
   --font-display: "Libre Caslon Display", Georgia, serif;
   --font-title: "Libre Caslon Text", Georgia, serif;
   --font-script: "Caveat", cursive;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }

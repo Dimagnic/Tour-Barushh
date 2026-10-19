@@ -1,6 +1,6 @@
 # Barushh · Guías de Turismo
 
-Sitio web de Barushh (guías de turismo en Puebla, México). Next.js 15, React 19 y Tailwind 4. Títulos en Libre Caslon Display, textos en Poppins. Una sola página en español, sin compras en línea: las reservas y cotizaciones se hacen por WhatsApp.
+Sitio web de Barushh (guías de turismo en Puebla, México). Next.js 15, React 19 y Tailwind 4. Una sola página en español, sin compras en línea: las reservas y cotizaciones se hacen por WhatsApp.
 
 ## Arranque
 1. `npm install`
