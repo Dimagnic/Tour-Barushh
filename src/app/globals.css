@@ -8,7 +8,8 @@
   --color-cream: #f5efe2;
   --color-brown: #8a6d3b;
   --color-terra: #b4532f;
-  --font-display: "Playfair Display", Georgia, serif;
+  --font-display: "Libre Caslon Display", Georgia, serif;
+  --font-title: "Libre Caslon Text", Georgia, serif;
   --font-script: "Caveat", cursive;
   --font-sans: "Poppins", system-ui, sans-serif;
 }
@@ -17,6 +18,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 body { background: var(--color-ink); color: var(--color-ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; }
 :focus-visible { outline: 3px solid var(--color-gold); outline-offset: 2px; }
 summary::-webkit-details-marker { display: none; }
+/* Libre Caslon Display solo existe en peso regular: se evita el negrita sintético */
+.font-display { font-weight: 400 !important; }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }

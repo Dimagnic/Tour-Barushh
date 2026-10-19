@@ -6,7 +6,7 @@ import { CurvedArrow, Leaves, Mandala, MountainMark, Stamp } from '@/components/
 import { site, wa } from '@/data/site';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials } from '@/data/content';
 
-const h2 = 'font-display text-[2.5rem] font-bold leading-[1.06] md:text-[3.3rem]';
+const h2 = 'font-display text-[2.7rem] leading-[1.06] md:text-[3.6rem]';
 const label = 'mb-4 text-[12px] font-medium uppercase tracking-[0.3em]';
 const gold = 'inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-[15px] font-semibold text-ink shadow-lg hover:brightness-95';
 const dark = 'inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-[15px] font-semibold text-white hover:brightness-125';
@@ -28,8 +28,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-ink/45 lg:hidden" />
         <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#031321]/85 to-transparent" />
         <div className={`${wrap} flex w-full flex-1 flex-col justify-center pb-6 pt-32`}>
-          <h1 className="max-w-[640px] font-display text-[2.8rem] font-semibold leading-[1.08] sm:text-[3.6rem] lg:text-[4.2rem]">
-            Más que un tour,<br /><em className="text-gold">una experiencia</em><br />que se vive.
+          <h1 className="max-w-[640px] font-display text-[3rem] leading-[1.08] sm:text-[3.9rem] lg:text-[4.5rem]">
+            Más que un tour,<br /><em className="font-title font-normal italic text-gold">una experiencia</em><br />que se vive.
           </h1>
           <p className="mt-6 max-w-[440px] text-[17px] leading-relaxed text-white/95">Conoce Puebla y sus alrededores de la mano de guías locales que aman su tierra, su historia y su gente.</p>
           <div className="mt-8 flex flex-wrap items-center gap-7">
@@ -81,7 +81,7 @@ export default function Home() {
                     <span className="absolute -bottom-4 left-4 z-10 flex items-center gap-1.5 rounded-full border border-gold/60 bg-[#fffdf8] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] shadow-sm"><Icon name="pin" className="size-3.5" />{e.place}</span>
                   </div>
                   <div className="flex flex-1 flex-col rounded-b-2xl bg-[#fffdf8] p-5 pt-8 shadow-sm">
-                    <h3 className="font-display text-[1.25rem] font-bold leading-snug">{e.title}</h3>
+                    <h3 className="font-title text-[1.15rem] font-bold leading-snug">{e.title}</h3>
                     <p className="mt-2 flex-1 text-[14px] leading-relaxed text-ink/70">{e.text}</p>
                     <a href={wa(`Hola, quiero información sobre: ${e.title}.`)} target="_blank" rel="noopener noreferrer" className="mt-4 w-fit rounded-full border border-brown/50 px-5 py-2 text-[13px] font-medium hover:border-ink">Ver más →</a>
                   </div>
@@ -181,7 +181,7 @@ export default function Home() {
       <section id="contacto" className="relative z-[60] grid bg-navy text-white lg:grid-cols-[120px_1.45fr_0.9fr_1.05fr]">
         <div aria-hidden="true" className="talavera h-16 lg:h-auto" />
         <div className="px-6 py-14 lg:px-12 lg:py-16">
-          <h2 className="font-display text-[2.2rem] font-semibold leading-tight md:text-[2.7rem]">¿Listo para vivir<br />esta experiencia?</h2>
+          <h2 className="font-display text-[2.4rem] leading-tight md:text-[3rem]">¿Listo para vivir<br />esta experiencia?</h2>
           <p className="mt-4 max-w-[420px] text-[15px] text-white/85">Cuéntanos qué tipo de tour te interesa y te ayudamos a planear un viaje inolvidable.</p>
           <a href={wa('Hola, quisiera cotizar un tour con Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${gold} mt-7`}><Icon name="whatsapp" className="size-6" />Cotiza por WhatsApp →</a>
         </div>

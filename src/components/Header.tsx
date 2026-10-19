@@ -16,7 +16,7 @@ export function Header() {
     <header className={`fixed inset-x-0 top-0 z-40 text-white transition-colors ${solid ? 'border-b border-white/10 bg-ink/90 backdrop-blur' : 'bg-gradient-to-b from-black/45 to-transparent'}`}>
       <div className="mx-auto flex h-[76px] max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-8">
         <Link href="/" className="leading-none" aria-label="Tour Barushh, guías de turismo">
-          <span className="block font-display text-[26px] font-semibold uppercase tracking-tight">Tour Barushh</span>
+          <span className="block font-display text-[27px] uppercase tracking-tight">Tour Barushh</span>
           <span className="mt-1 block text-[8px] font-medium uppercase tracking-[0.3em] text-white/80">Guías de turismo</span>
         </Link>
         <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
