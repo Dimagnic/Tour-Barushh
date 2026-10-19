@@ -55,8 +55,8 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 pb-56 pt-6 text-sm">
-          <p>© {new Date().getFullYear()} Tour Barushh. Todos los derechos reservados.</p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 pb-12 pt-6 text-sm">
+          <p className="max-w-[15rem] sm:max-w-none">© {new Date().getFullYear()} Tour Barushh. Todos los derechos reservados.</p>
           <p className="flex items-center gap-3">
             <span className="font-bold uppercase tracking-[0.14em]">Diseñado por</span>
             <a href={site.ceroUrl} target="_blank" rel="noopener noreferrer" aria-label="Cero+, sitio de quien diseñó esta página" className="rounded-lg bg-white px-3 py-1.5 transition hover:brightness-95"><Image src="/brand/cero.webp" alt="Cero+" width={96} height={30} className="h-[26px] w-auto" /></a>
