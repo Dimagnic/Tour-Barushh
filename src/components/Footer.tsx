@@ -42,9 +42,11 @@ export function Footer() {
         <div>
           <h2 className={head}>Experiencias</h2>
           {experiences.map((e) => <Link key={e.title} className={link} href="/#experiencias">{e.title}</Link>)}
+          <Link className={link} href="/articulos">Artículos de viaje</Link>
         </div>
         <div>
           <h2 className={head}>Legal</h2>
+          <Link className={link} href="/nosotros#politica">Política de la empresa</Link>
           <Link className={link} href="/legal/privacy">Aviso de privacidad</Link>
           <Link className={link} href="/legal/terms">Términos y condiciones</Link>
         </div>

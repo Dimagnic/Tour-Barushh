@@ -128,7 +128,7 @@ export default function Home() {
             <p className={`${label} text-brown`}>Nuestra esencia</p>
             <h2 className={h2}>Personas que<br />hacen la diferencia</h2>
             <p className="mt-6 max-w-[500px] text-[17px] leading-relaxed text-ink/75">Somos un equipo de guías apasionados por compartir <span className="text-ink">la historia, la cultura y la belleza de Puebla.</span> Cada tour está pensado para que vivas una experiencia auténtica, segura y llena de momentos especiales.</p>
-            <a href={wa('Hola, quisiera conocer más sobre Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${dark} mt-8`}>Conoce nuestra historia →</a>
+            <Link href="/nosotros" className={`${dark} mt-8`}>Conoce nuestra historia →</Link>
             <ul className="mt-10 grid max-w-[560px] grid-cols-2 gap-6 sm:grid-cols-4">
               {essence.map((l) => <li key={l.t} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
             </ul>
