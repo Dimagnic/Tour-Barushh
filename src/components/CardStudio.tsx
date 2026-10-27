@@ -5,7 +5,7 @@ import { site } from '@/data/site';
 const W = 1063; // 90 mm a 300 dpi
 const H = 591; // 50 mm a 300 dpi
 const NAVY = '#041623', GOLD = '#e8b23a', CREAM = '#f5efe2', BROWN = '#8a6d3b', COBALT = '#1f4fa3';
-const KEY = 'barushh-tarjeta-v1';
+const KEY = 'barushh-tarjeta-v2'; // v2: numero de WhatsApp nuevo (los datos guardados con v1 traian el anterior)
 
 type Info = { name: string; role: string; phone: string; email: string; web: string };
 type QrMode = 'web' | 'vcard' | 'whatsapp';

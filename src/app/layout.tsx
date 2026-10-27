@@ -9,7 +9,7 @@ import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/600.css';
 import '@fontsource/caveat/500.css';
 import './globals.css';
-import { site, wa } from '@/data/site';
+import { site } from '@/data/site';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
@@ -24,7 +24,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const ld = { '@context': 'https://schema.org', '@type': 'TravelAgency', name: site.name, url: site.url, telephone: '+522219663226', areaServed: 'Puebla, México', inLanguage: 'es' };
+  const sameAs = Object.values(site.social).filter(Boolean);
+  const ld = {
+    '@context': 'https://schema.org', '@type': 'TravelAgency', '@id': `${site.url}/#agencia`,
+    name: site.name, url: site.url, description, inLanguage: 'es-MX',
+    logo: `${site.url}/brand/logo.webp`, image: `${site.url}/brand/logo.webp`,
+    telephone: `+${site.whatsapp}`,
+    ...(site.email ? { email: site.email } : {}),
+    address: { '@type': 'PostalAddress', addressLocality: 'Puebla', addressRegion: 'Puebla', addressCountry: 'MX' },
+    areaServed: [{ '@type': 'City', name: 'Puebla' }, { '@type': 'City', name: 'Cholula' }, { '@type': 'State', name: 'Puebla' }],
+    contactPoint: { '@type': 'ContactPoint', telephone: `+${site.whatsapp}`, contactType: 'reservations', availableLanguage: ['es'] },
+    founder: { '@type': 'Person', name: site.guide.name, jobTitle: site.guide.role },
+    ...(sameAs.length ? { sameAs } : {}),
+  };
   return (
     <html lang="es">
       <body>

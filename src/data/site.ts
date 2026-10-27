@@ -1,8 +1,8 @@
 export const site = {
   name: 'Tour Barushh',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tour-barushh.vercel.app',
-  whatsapp: '522219663226',
-  whatsappDisplay: '+52 221 966 3226',
+  whatsapp: '522212139031',
+  whatsappDisplay: '+52 221 213 9031',
   email: '', // pendiente: aparece en el footer cuando tenga valor
   hours: '', // pendiente
   social: { instagram: '', facebook: '', tiktok: '', youtube: '' } as Record<string, string>, // pendiente: pega aquí los enlaces

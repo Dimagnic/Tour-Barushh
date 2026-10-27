@@ -270,16 +270,6 @@
   "en": "View of a mountain town and its church"
  },
  {
-  "id": "guia-montana",
-  "cat": "guia",
-  "src": "/photos/guia/guia-montana.webp",
-  "thumb": "/photos/guia/guia-montana-thumb.webp",
-  "w": 1800,
-  "h": 2400,
-  "es": "Guía de turistas con la sierra de fondo",
-  "en": "Tour guide with the mountains behind"
- },
- {
   "id": "maqueta-catedral",
   "cat": "cultura",
   "src": "/photos/cultura/maqueta-catedral.webp",
@@ -448,16 +438,6 @@
   "h": 2400,
   "es": "Guía de turistas en un mirador",
   "en": "Tour guide at a viewpoint"
- },
- {
-  "id": "tranvia-pasajeros-1",
-  "cat": "transporte",
-  "src": "/photos/transporte/tranvia-pasajeros-1.webp",
-  "thumb": "/photos/transporte/tranvia-pasajeros-1-thumb.webp",
-  "w": 1800,
-  "h": 2400,
-  "es": "Viajeros a bordo de un tranvía turístico",
-  "en": "Travelers on a tourist tram"
  },
  {
   "id": "tranvia-pasajeros-2",

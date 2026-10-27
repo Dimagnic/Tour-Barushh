@@ -3,19 +3,10 @@ import { Photo } from '@/components/Photo';
 import { Icon } from '@/components/Icon';
 import { Carousel } from '@/components/Carousel';
 import { CurvedArrow, Leaves, Mandala, MountainMark, Stamp } from '@/components/Ornaments';
+import { Torn } from '@/components/Torn';
 import { site, wa } from '@/data/site';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials } from '@/data/content';
-
-const h2 = 'font-display text-[2.7rem] leading-[1.06] md:text-[3.6rem]';
-const label = 'mb-4 text-[12px] font-medium uppercase tracking-[0.3em]';
-const gold = 'inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 text-[15px] font-semibold text-ink shadow-lg hover:brightness-95';
-const dark = 'inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-[15px] font-semibold text-white hover:brightness-125';
-const wrap = 'relative mx-auto max-w-[1400px] px-5 lg:px-8';
-
-/** Fondo rasgado de cada sección: se dibuja detrás del contenido para que las fotos puedan sobresalir. */
-function Torn({ children, className = '', b = false }: { children?: React.ReactNode; className?: string; b?: boolean }) {
-  return <div aria-hidden="true" className={`absolute inset-x-0 -top-5 bottom-0 overflow-hidden ${b ? 'torn-top-b' : 'torn-top'} ${className}`}>{children}</div>;
-}
+import { darkBtn as dark, goldBtn as gold, h2Home as h2, label, wrap } from '@/lib/ui';
 
 export default function Home() {
   const reserve = wa('Hola, quiero reservar una experiencia con Tour Barushh.');
@@ -38,11 +29,7 @@ export default function Home() {
               <a href={site.videoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[13px] font-medium leading-tight">
                 <span className="grid size-12 place-items-center rounded-full border-2 border-gold text-gold"><Icon name="play" className="size-5" /></span>Conoce Tour Barushh<br />en 1 minuto
               </a>
-            ) : (
-              <span title="Video próximamente" className="flex items-center gap-3 text-[13px] font-medium leading-tight text-white/90">
-                <span className="grid size-12 place-items-center rounded-full border-2 border-gold text-gold"><Icon name="play" className="size-5" /></span>Conoce Tour Barushh<br />en 1 minuto
-              </span>
-            )}
+            ) : null}
           </div>
           <div className="pointer-events-none absolute right-[13%] top-[50%] hidden -rotate-[8deg] font-script text-[2.9rem] leading-[1.05] text-white lg:block">Descubre<br />&nbsp;&nbsp;Vive<br />&nbsp;&nbsp;&nbsp;Conecta<CurvedArrow className="absolute -right-16 -top-2 w-16 text-white" /></div>
         </div>

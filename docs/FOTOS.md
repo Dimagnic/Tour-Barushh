@@ -45,14 +45,13 @@ Los textos alternativos (es/en) están en `src/data/photos.json`.
 
 - `puesto-textiles` (1349×2400): Puesto de textiles artesanales
 
-## Transporte (7)
+## Transporte (6)
 
 - `van-pasajeros` (2400×1800): Pasajeros dentro de la camioneta de turismo
 - `van-guia` (1350×2400): Guía con pasajeros en la camioneta
 - `tranvia-guia` (1800×2400): Guía con pasajeros en un tranvía turístico
 - `tranvia-interior` (2400×1349): Interior de un tranvía turístico
 - `bus-turistico` (2400×1800): Autobús turístico rojo de dos pisos
-- `tranvia-pasajeros-1` (1800×2400): Viajeros a bordo de un tranvía turístico
 - `tranvia-pasajeros-2` (1800×2400): Viajeros a bordo de un tranvía turístico
 
 ## Grupos de viajeros (5)
@@ -63,14 +62,13 @@ Los textos alternativos (es/en) están en `src/data/photos.json`.
 - `grupo-muro-rojo-2` (2400×1800): Grupo de viajeros en el centro histórico
 - `grupo-muro-rojo-3` (2400×1800): Viajeros durante un recorrido a pie
 
-## El guía (10)
+## El guía (9)
 
 - `guia-con-viajera` (1800×2400): Guía de turistas con una viajera
 - `guia-calle-empedrada` (1800×2400): Guía de turistas en una calle empedrada
 - `guia-calle-colonial` (1800×2400): Guía de turistas en una calle colonial
 - `guia-credencial` (1350×2400): Guía de turistas con su credencial
 - `guia-restaurante` (1800×2400): Guía de turistas en un restaurante
-- `guia-montana` (1800×2400): Guía de turistas con la sierra de fondo
 - `guia-retrato` (1350×2400): Retrato del guía de turistas
 - `guia-mirador-1` (1800×2400): Guía de turistas en un mirador
 - `guia-mirador-2` (1800×2400): Guía de turistas en un mirador
