@@ -60,6 +60,11 @@ async function drawFront(cv: HTMLCanvasElement) {
   c.fillStyle = GOLD; c.fillRect(540, 368, 120, 3);
   c.font = '500 24px "DM Sans", sans-serif'; spaced(c, 'GUÍAS DE TURISMO', 540, 418, 6);
   c.fillStyle = 'rgba(255,255,255,.75)'; c.font = '500 21px "DM Sans", sans-serif'; spaced(c, 'PUEBLA · MÉXICO', 540, 456, 5);
+  // Lema de la portada del sitio: "Más que un tour, una experiencia que se vive." (la parte central en dorado, como en la web)
+  const lema: [string, string][] = [['Más que un tour, ', '#fff'], ['una experiencia', GOLD], [' que se vive.', '#fff']];
+  fit(c, lema.map(([t]) => t).join(''), (p) => `italic 400 ${p}px "Libre Caslon Text", Georgia, serif`, 450, 26, 18);
+  let lx = 540;
+  for (const [t, color] of lema) { c.fillStyle = color; c.fillText(t, lx, 506); lx += c.measureText(t).width; }
   strip(c, H - 34, 34);
 }
 
@@ -100,7 +105,7 @@ export function CardStudio() {
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(info)); } catch { /* sin almacenamiento */ } }, [info]);
 
   const render = useCallback(async () => {
-    await Promise.all([document.fonts.load('60px "Libre Caslon Display"'), document.fonts.load('500 24px "DM Sans"'), document.fonts.load('600 17px "DM Sans"')]).catch(() => undefined);
+    await Promise.all([document.fonts.load('60px "Libre Caslon Display"'), document.fonts.load('500 24px "DM Sans"'), document.fonts.load('600 17px "DM Sans"'), document.fonts.load('italic 400 26px "Libre Caslon Text"')]).catch(() => undefined);
     if (front.current) await drawFront(front.current);
     if (back.current) await drawBack(back.current, info, mode);
   }, [info, mode]);
