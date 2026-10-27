@@ -50,7 +50,7 @@ async function qrCanvas(text: string, size: number) {
 }
 
 async function drawFront(cv: HTMLCanvasElement) {
-  const c = cv.getContext('2d')!; const logo = await loadImg('/brand/logo.webp');
+  const c = cv.getContext('2d')!; const logo = await loadImg('/brand/logo-badge.png');
   c.fillStyle = NAVY; c.fillRect(0, 0, W, H);
   c.strokeStyle = GOLD; c.lineWidth = 3; c.strokeRect(28, 28, W - 56, H - 56 - 34);
   c.drawImage(logo, 74, (H - 34 - 400) / 2, 400, 400);

@@ -17,7 +17,7 @@ export function Footer() {
     <footer className="bg-ink text-white/75">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1fr_1.2fr]">
         <div>
-          <Image src="/brand/logo.webp" alt="Tour Barushh, guías de turismo en Puebla" width={112} height={112} className="size-28" />
+          <Image src="/brand/logo-badge.png" alt="Tour Barushh, guías de turismo en Puebla" width={112} height={112} className="size-28" />
           <p className="mt-5 max-w-xs leading-relaxed">Guías de turismo en Puebla, México: tours culturales, pueblos mágicos y viajes para grupos.</p>
           <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-bold text-[#4ade80] hover:underline">WhatsApp: {site.whatsappDisplay}</a>
           {site.email ? <a href={`mailto:${site.email}`} className="mt-1 block hover:text-white">{site.email}</a> : null}
