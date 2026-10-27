@@ -1,4 +1,4 @@
-export const site = {
+﻿export const site = {
   name: 'Tour Barushh',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tour-barushh.vercel.app',
   whatsapp: '522212139031',
@@ -8,7 +8,7 @@ export const site = {
   social: { instagram: '', facebook: '', tiktok: '', youtube: '' } as Record<string, string>, // pendiente: pega aquí los enlaces
   videoUrl: '', // pendiente: enlace del video "Conoce Barushh en 1 minuto"
   ceroUrl: 'https://cero-new-generation-e19z.vercel.app/',
-  clienteaiToken: 'qrzvhd8tq1o02mhq',
+  clienteaiToken: 'cuxcpcmttdtaqp9p',
   // Datos del guía fundador: se usan en la biografía y en la tarjeta. Cambia el nombre cuando el cliente lo confirme.
   guide: { name: 'José Carranza', role: 'Guía de turistas · Fundador', photo: 'guia-calle-colonial', photo2: 'guia-mirador-1' },
   exampleContent: true, // muestra el aviso "texto de ejemplo" en Nosotros; ponlo en false cuando el cliente entregue la información real
