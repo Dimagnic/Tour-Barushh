@@ -3,6 +3,8 @@ import { Photo } from '@/components/Photo';
 import { Icon } from '@/components/Icon';
 import { Torn } from '@/components/Torn';
 import { ExampleNote } from '@/components/ExampleNote';
+import { VideoModal } from '@/components/VideoModal';
+import { videoSource } from '@/lib/video';
 import { site, wa } from '@/data/site';
 import { bio, mission, policy, timeline, values, vision } from '@/data/about';
 import { darkBtn, goldBtn, h2, label, wrap } from '@/lib/ui';
@@ -14,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function Nosotros() {
+  const video = site.videoInstitucional || site.videoUrl;
+  const ready = videoSource(video) !== null;
   return (
     <>
       {/* BIOGRAFÍA */}
@@ -38,6 +42,32 @@ export default function Nosotros() {
             <p className="mt-6 font-display text-[1.6rem] text-ink">{site.guide.name}</p>
             <p className="text-[13px] font-medium uppercase tracking-[0.2em] text-brown">{site.guide.role}</p>
             <a href={wa('Hola, me gustaría hablar con el guía de Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${darkBtn} mt-7`}>Habla con un guía →</a>
+          </div>
+        </div>
+
+        {/* VIDEO INSTITUCIONAL: se activa al poner el enlace en site.ts (videoInstitucional o videoUrl) */}
+        <div id="video" className={`${wrap} mt-24 grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]`}>
+          <div>
+            <p className={`${label} text-brown`}>En video</p>
+            <h2 className={h2}>Conócenos en video</h2>
+            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-ink/80">Mira cómo vivimos cada recorrido: los lugares, la gente y la forma en que cuidamos a cada viajero.</p>
+          </div>
+          <div className="relative aspect-video overflow-hidden rounded-3xl shadow-[0_14px_44px_rgba(60,40,10,.2)]">
+            <Photo id={site.videoPoster} sizes="(min-width:1024px) 55vw, 100vw" className="vivid" />
+            <div className="absolute inset-0 bg-ink/35" />
+            {ready ? (
+              <VideoModal url={video} title="Video institucional de Tour Barushh" className="group absolute inset-0 grid place-items-center">
+                <span className="grid size-20 place-items-center rounded-full bg-gold text-ink shadow-xl transition group-hover:scale-105"><Icon name="play" className="ml-1 size-8" /></span>
+                <span className="sr-only">Reproducir video</span>
+              </VideoModal>
+            ) : (
+              <div className="absolute inset-0 grid place-items-center">
+                <div className="flex flex-col items-center gap-3 text-white">
+                  <span className="grid size-20 place-items-center rounded-full border-2 border-white/70"><Icon name="play" className="ml-1 size-8" /></span>
+                  <span className="rounded-full bg-ink/70 px-4 py-1.5 text-[13px] font-medium">Video próximamente</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

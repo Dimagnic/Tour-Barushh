@@ -6,7 +6,10 @@
   email: '', // pendiente: aparece en el footer cuando tenga valor
   hours: '', // pendiente
   social: { instagram: '', facebook: '', tiktok: '', youtube: '' } as Record<string, string>, // pendiente: pega aquí los enlaces
-  videoUrl: '', // pendiente: enlace del video "Conoce Barushh en 1 minuto"
+  // VIDEOS: pega el enlace de YouTube, de Vimeo o de un archivo .mp4 (por ejemplo '/videos/institucional.mp4' dentro de public/).
+  videoUrl: '', // video corto de la portada: botón "Conoce Tour Barushh en 1 minuto" (aparece solo cuando tiene enlace)
+  videoInstitucional: '', // video de la sección "Conócenos en video" de Nosotros; si queda vacío usa videoUrl
+  videoPoster: 'grupo-mirador', // foto de portada del video en Nosotros (id de src/data/photos.json)
   ceroUrl: 'https://cero-new-generation-e19z.vercel.app/',
   clienteaiToken: 'cuxcpcmttdtaqp9p',
   // Datos del guía fundador: se usan en la biografía y en la tarjeta. Cambia el nombre cuando el cliente lo confirme.

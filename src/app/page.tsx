@@ -4,6 +4,7 @@ import { Icon } from '@/components/Icon';
 import { Carousel } from '@/components/Carousel';
 import { CurvedArrow, Leaves, Mandala, MountainMark, Stamp } from '@/components/Ornaments';
 import { Torn } from '@/components/Torn';
+import { VideoModal } from '@/components/VideoModal';
 import { site, wa } from '@/data/site';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials } from '@/data/content';
 import { darkBtn as dark, goldBtn as gold, h2Home as h2, label, wrap } from '@/lib/ui';
@@ -26,9 +27,9 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap items-center gap-7">
             <a href={reserve} target="_blank" rel="noopener noreferrer" className={gold}>Reserva tu experiencia →</a>
             {site.videoUrl ? (
-              <a href={site.videoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[13px] font-medium leading-tight">
+              <VideoModal url={site.videoUrl} title="Conoce Tour Barushh en 1 minuto" className="flex items-center gap-3 text-left text-[13px] font-medium leading-tight hover:text-gold">
                 <span className="grid size-12 place-items-center rounded-full border-2 border-gold text-gold"><Icon name="play" className="size-5" /></span>Conoce Tour Barushh<br />en 1 minuto
-              </a>
+              </VideoModal>
             ) : null}
           </div>
           <div className="pointer-events-none absolute right-[13%] top-[50%] hidden -rotate-[8deg] font-script text-[2.9rem] leading-[1.05] text-white lg:block">Descubre<br />&nbsp;&nbsp;Vive<br />&nbsp;&nbsp;&nbsp;Conecta<CurvedArrow className="absolute -right-16 -top-2 w-16 text-white" /></div>
