@@ -10,11 +10,10 @@ import { RichText } from '@/components/RichText';
 import { Lines } from '@/components/Lines';
 import { darkBtn, goldBtn, h2, label, wrap } from '@/lib/ui';
 
-export const metadata: Metadata = {
-  title: 'Nosotros: historia, misión, visión y política',
-  description: 'Conoce al guía fundador de Tour Barushh, su historia, la misión y visión de la empresa y nuestra política de servicio.',
-  alternates: { canonical: '/nosotros' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getContent('seo');
+  return { title: seo.nosotrosTitle, description: seo.nosotrosDescription, alternates: { canonical: '/nosotros' } };
+}
 
 export default async function Nosotros() {
   const g = await getGeneral();

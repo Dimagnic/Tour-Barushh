@@ -1,6 +1,18 @@
 export type Block = { h: string } | { p: string } | { ul: string[] } | { q: string };
 export interface Article { slug: string; title: string; excerpt: string; category: string; minutes: number; cover: string; blocks: Block[] }
 
+/** Convierte los bloques en el texto que se edita en el panel: ## subtítulo, - lista, > cita, línea en blanco = párrafo. */
+export const toBody = (blocks: Block[]) => blocks.map((b) => ('h' in b ? `## ${b.h}` : 'q' in b ? `> ${b.q}` : 'ul' in b ? b.ul.map((x) => `- ${x}`).join('\n') : b.p)).join('\n\n');
+/** Lo contrario: el texto del panel en bloques para mostrar el artículo. */
+export const parseBody = (text: string): Block[] =>
+  text.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean).map((x): Block => {
+    if (x.startsWith('## ')) return { h: x.slice(3).trim() };
+    if (x.startsWith('> ')) return { q: x.slice(2).trim().replace(/^[“"]|[”"]$/g, '') };
+    const lines = x.split('\n');
+    if (lines.every((l) => /^\s*-\s+/.test(l))) return { ul: lines.map((l) => l.replace(/^\s*-\s+/, '')) };
+    return { p: lines.join(' ') };
+  });
+
 export const slugify = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 export const articles: Article[] = [

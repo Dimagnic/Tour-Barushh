@@ -17,6 +17,9 @@ export default async function Dashboard() {
     ['/admin/nosotros', 'Nosotros', 'Guía, biografía, video, trayectoria, misión, visión, valores y política.'],
     ['/admin/privacidad', 'Aviso de privacidad', 'Texto legal obligatorio por el manejo de datos personales.'],
     ['/admin/terminos', 'Términos y condiciones', 'Reservas, pagos, cancelaciones y responsabilidades.'],
+    ['/admin/belleza', 'Belleza', 'Catálogo de productos con fotos, precios, categorías e ingredientes.'],
+    ['/admin/articulos', 'Artículos', 'Escribe, edita, ordena o borra los artículos de viaje.'],
+    ['/admin/seo', 'SEO (Google y redes)', 'Título y descripción de cada página en Google, e imagen al compartir.'],
     ['/admin/tarjeta', 'Tarjeta de presentación', 'Descarga tu tarjeta en PDF o imagen, con código QR.'],
   ];
   return (

@@ -5,6 +5,7 @@ import { getAdmin, supabaseServer } from '@/lib/supabase/server';
 import { type General, withDefaults } from '@/lib/cms';
 import { isSectionKey, schemas, validate } from '@/lib/cms-schema';
 import { isValidImage } from '@/lib/media';
+import { slugify } from '@/data/articles';
 
 export type SaveState = { ok: boolean; message: string } | null;
 
@@ -53,6 +54,16 @@ const tidy = (v: unknown): unknown =>
 export async function saveSection(key: string, data: unknown): Promise<SaveState> {
   if (!isSectionKey(key)) return { ok: false, message: 'Sección desconocida.' };
   const clean = withDefaults(key, tidy(data)) as unknown as Record<string, unknown>;
+  if (key === 'articles') {
+    const items = (clean.items ?? []) as { slug: string; title: string }[];
+    const seen = new Set<string>();
+    for (const it of items) {
+      it.slug = slugify(it.slug || it.title);
+      if (!it.slug) return { ok: false, message: 'Cada artículo necesita un título.' };
+      if (seen.has(it.slug)) return { ok: false, message: `Hay dos artículos con la misma dirección: /articulos/${it.slug}. Cambia el título o la dirección de uno.` };
+      seen.add(it.slug);
+    }
+  }
   const err = validate(schemas[key].groups.flatMap((g) => g.fields), clean, isValidImage);
   if (err) return { ok: false, message: err };
   return saveContent(key, clean);

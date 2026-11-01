@@ -26,7 +26,24 @@ function FieldView({ f, value, onChange, id }: { f: Field; value: unknown; onCha
       </div>
     );
   }
-  if (f.kind === 'image') return <div><ImagePicker label={f.label} value={String(value ?? '')} onChange={onChange} />{f.help ? <p className={hint}>{f.help}</p> : null}</div>;
+  if (f.kind === 'image') {
+    return (
+      <div>
+        <ImagePicker label={f.label + (f.optional ? ' (opcional)' : '')} value={String(value ?? '')} onChange={onChange} />
+        {f.optional && value ? <button type="button" onClick={() => onChange('')} className="mt-2 text-[13px] font-medium text-terra hover:underline">Quitar foto</button> : null}
+        {f.help ? <p className={hint}>{f.help}</p> : null}
+      </div>
+    );
+  }
+  if (f.kind === 'number') {
+    return (
+      <div>
+        <label htmlFor={id} className={lab}>{f.label}</label>
+        <input id={id} type="number" min={f.min} max={f.max} value={typeof value === 'number' ? value : ''} onChange={(e) => onChange(e.target.value === '' ? f.min : Number(e.target.value))} className={`${input} max-w-[160px]`} />
+        {f.help ? <p className={hint}>{f.help}</p> : null}
+      </div>
+    );
+  }
   if (f.kind === 'icon') {
     return (
       <div>
@@ -49,6 +66,11 @@ function FieldView({ f, value, onChange, id }: { f: Field; value: unknown; onCha
     );
   }
   // Lista: agregar, quitar y reordenar elementos
+  return <ListField f={f} value={value} onChange={onChange} id={id} />;
+}
+
+function ListField({ f, value, onChange, id }: { f: Extract<Field, { kind: 'list' }>; value: unknown; onChange: (v: unknown) => void; id: string }) {
+  const [open, setOpen] = useState<number | null>(null);
   const items = (Array.isArray(value) ? value : []) as Obj[];
   const set = (next: Obj[]) => onChange(next);
   const move = (i: number, d: number) => { const n = [...items]; [n[i], n[i + d]] = [n[i + d], n[i]]; set(n); };
@@ -59,18 +81,19 @@ function FieldView({ f, value, onChange, id }: { f: Field; value: unknown; onCha
           <div key={i} className="rounded-xl border border-ink/15 bg-white/60 p-4">
             <div className="mb-3 flex items-center gap-2">
               <p className="mr-auto truncate text-[14px] font-semibold">{i + 1}. {String(it[f.itemTitle] || 'Sin título')}</p>
+              {f.collapsible ? <button type="button" onClick={() => setOpen(open === i ? null : i)} aria-expanded={open === i} className="rounded-full border border-ink/20 px-4 py-1.5 text-[13px] font-medium hover:border-cobalt hover:text-cobalt">{open === i ? 'Cerrar' : 'Editar'}</button> : null}
               <button type="button" className={small} aria-label="Subir" disabled={i === 0} onClick={() => move(i, -1)}>↑</button>
               <button type="button" className={small} aria-label="Bajar" disabled={i === items.length - 1} onClick={() => move(i, 1)}>↓</button>
               <button type="button" className={`${small} hover:border-terra hover:text-terra`} aria-label="Eliminar" disabled={items.length <= f.min}
                 onClick={() => { if (confirm('¿Eliminar este elemento? El cambio se aplica al guardar.')) set(items.filter((_, j) => j !== i)); }}>✕</button>
             </div>
-            <div className="space-y-4">
+            {!f.collapsible || open === i ? <div className="space-y-4">
               {f.fields.map((sub) => <FieldView key={sub.key} f={sub} id={`${id}-${i}-${sub.key}`} value={it[sub.key]} onChange={(v) => set(items.map((x, j) => (j === i ? { ...x, [sub.key]: v } : x)))} />)}
-            </div>
+            </div> : null}
           </div>
         ))}
       </div>
-      <button type="button" disabled={items.length >= f.max} onClick={() => set([...items, { ...f.empty }])}
+      <button type="button" disabled={items.length >= f.max} onClick={() => { set([...items, { ...f.empty }]); if (f.collapsible) setOpen(items.length); }}
         className="mt-4 rounded-full border border-dashed border-ink/40 px-5 py-2.5 text-[14px] font-medium hover:border-cobalt hover:text-cobalt disabled:opacity-40">
         + Agregar ({items.length}/{f.max})
       </button>

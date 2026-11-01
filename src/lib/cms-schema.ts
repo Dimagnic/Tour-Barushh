@@ -6,10 +6,11 @@ import type { IconName } from '@/data/content';
  */
 export type Field =
   | { kind: 'text'; key: string; label: string; help?: string; max: number; multiline?: boolean; required?: boolean; placeholder?: string }
-  | { kind: 'image'; key: string; label: string; help?: string }
+  | { kind: 'image'; key: string; label: string; help?: string; optional?: boolean }
+  | { kind: 'number'; key: string; label: string; help?: string; min: number; max: number }
   | { kind: 'icon'; key: string; label: string }
   | { kind: 'toggle'; key: string; label: string; help?: string }
-  | { kind: 'list'; key: string; label: string; help?: string; min: number; max: number; fields: Field[]; itemTitle: string; empty: Record<string, unknown> };
+  | { kind: 'list'; key: string; label: string; help?: string; min: number; max: number; fields: Field[]; itemTitle: string; empty: Record<string, unknown>; collapsible?: boolean };
 
 export interface Schema { title: string; intro: string; groups: { title: string; help?: string; fields: Field[] }[] }
 
@@ -20,7 +21,7 @@ export const ICONS: [IconName, string][] = [
 
 const lineHelp = 'Presiona Enter para cortar la línea donde quieras.';
 
-export type SectionKey = 'hero' | 'experiences' | 'gallery' | 'testimonials' | 'living' | 'essence' | 'contact' | 'about' | 'privacy' | 'terms';
+export type SectionKey = 'hero' | 'experiences' | 'gallery' | 'testimonials' | 'living' | 'essence' | 'contact' | 'about' | 'privacy' | 'terms' | 'beauty' | 'articles' | 'seo';
 
 export const schemas: Record<SectionKey, Schema> = {
   hero: {
@@ -224,6 +225,71 @@ export const schemas: Record<SectionKey, Schema> = {
       ] },
     ],
   },
+  beauty: {
+    title: 'Belleza',
+    intro: 'La página /belleza: encabezado y catálogo de productos. Mientras un producto no tenga foto, se muestra una ilustración con la etiqueta “Foto pendiente”.',
+    groups: [
+      { title: 'Encabezado', fields: [
+        { kind: 'text', key: 'heroTitle', label: 'Título', max: 80, required: true },
+        { kind: 'text', key: 'heroText', label: 'Texto', max: 220, multiline: true, required: true },
+        { kind: 'text', key: 'ingredients', label: 'Sección “Lo que usamos”', max: 600, multiline: true, help: 'Ingredientes separados por comas. Vacío = se arma sola con los ingredientes de los productos.' },
+      ] },
+      { title: 'Productos', help: 'Los botones para filtrar se arman solos con las categorías que escribas.', fields: [
+        { kind: 'list', key: 'products', label: 'Productos', min: 1, max: 40, itemTitle: 'name', collapsible: true,
+          empty: { name: '', category: '', desc: '', ingredients: '', price: '', photo: '', kind: 'jar', bg: '#efe3c8', fg: '#8a6d3b' }, fields: [
+          { kind: 'text', key: 'name', label: 'Nombre', max: 70, required: true },
+          { kind: 'text', key: 'category', label: 'Categoría', max: 40, required: true, help: 'Escríbela igual en los productos que van juntos (ej. Jabones).' },
+          { kind: 'text', key: 'desc', label: 'Descripción', max: 220, multiline: true, required: true },
+          { kind: 'text', key: 'ingredients', label: 'Ingredientes', max: 200, help: 'Separados por comas: Avena, Miel, Aceite de oliva' },
+          { kind: 'text', key: 'price', label: 'Precio', max: 30, placeholder: 'Ej. $120', help: 'Vacío = no se muestra; el visitante pregunta por WhatsApp.' },
+          { kind: 'image', key: 'photo', label: 'Foto del producto', optional: true, help: 'Opcional. Mejor cuadrada u horizontal, con fondo limpio.' },
+        ] },
+      ] },
+    ],
+  },
+  articles: {
+    title: 'Artículos',
+    intro: 'Los artículos de viaje de /articulos. El primero de la lista es el destacado.',
+    groups: [
+      { title: 'Artículos', help: 'Formato del texto: línea en blanco = párrafo nuevo · ## subtítulo · - lista · > cita destacada.', fields: [
+        { kind: 'list', key: 'items', label: 'Artículos', min: 1, max: 60, itemTitle: 'title', collapsible: true,
+          empty: { slug: '', title: '', excerpt: '', category: '', minutes: 5, cover: 'catedral-puebla', body: '' }, fields: [
+          { kind: 'text', key: 'title', label: 'Título', max: 110, required: true },
+          { kind: 'text', key: 'slug', label: 'Dirección (URL)', max: 80, help: 'Se arma sola con el título si la dejas vacía. Si la cambias, la dirección anterior deja de funcionar.' },
+          { kind: 'text', key: 'category', label: 'Categoría', max: 30, required: true },
+          { kind: 'number', key: 'minutes', label: 'Minutos de lectura', min: 1, max: 60 },
+          { kind: 'image', key: 'cover', label: 'Foto de portada' },
+          { kind: 'text', key: 'excerpt', label: 'Resumen', max: 260, multiline: true, required: true, help: 'Aparece en la lista y en Google.' },
+          { kind: 'text', key: 'body', label: 'Texto del artículo', max: 20000, multiline: true, required: true },
+        ] },
+      ] },
+    ],
+  },
+  seo: {
+    title: 'SEO (Google y redes)',
+    intro: 'Cómo aparece cada página en Google y al compartir el enlace en WhatsApp o Facebook. Los artículos usan su propio título y resumen.',
+    groups: [
+      { title: 'Inicio', fields: [
+        { kind: 'text', key: 'homeTitle', label: 'Título en Google · Inicio', max: 70, required: true, help: 'Ideal: 50 a 60 caracteres.' },
+        { kind: 'text', key: 'homeDescription', label: 'Descripción en Google · Inicio', max: 170, multiline: true, required: true, help: 'Ideal: 140 a 160 caracteres.' },
+      ] },
+      { title: 'Nosotros', fields: [
+        { kind: 'text', key: 'nosotrosTitle', label: 'Título en Google · Nosotros', max: 70, required: true, help: 'Ideal: 50 a 60 caracteres.' },
+        { kind: 'text', key: 'nosotrosDescription', label: 'Descripción en Google · Nosotros', max: 170, multiline: true, required: true, help: 'Ideal: 140 a 160 caracteres.' },
+      ] },
+      { title: 'Belleza', fields: [
+        { kind: 'text', key: 'bellezaTitle', label: 'Título en Google · Belleza', max: 70, required: true, help: 'Ideal: 50 a 60 caracteres.' },
+        { kind: 'text', key: 'bellezaDescription', label: 'Descripción en Google · Belleza', max: 170, multiline: true, required: true, help: 'Ideal: 140 a 160 caracteres.' },
+      ] },
+      { title: 'Artículos', fields: [
+        { kind: 'text', key: 'articulosTitle', label: 'Título en Google · Artículos', max: 70, required: true, help: 'Ideal: 50 a 60 caracteres.' },
+        { kind: 'text', key: 'articulosDescription', label: 'Descripción en Google · Artículos', max: 170, multiline: true, required: true, help: 'Ideal: 140 a 160 caracteres.' },
+      ] },
+      { title: 'Imagen al compartir', fields: [
+        { kind: 'image', key: 'shareImage', label: 'Imagen para redes sociales', optional: true, help: 'Ideal 1200 × 630 px. Vacía = se usa el logo.' },
+      ] },
+    ],
+  },
 };
 export const isSectionKey = (k: string): k is SectionKey => k in schemas;
 
@@ -238,7 +304,10 @@ export function validate(fields: Field[], data: Record<string, unknown>, isImage
       if (s.length > f.max) return `${name} es muy largo (máximo ${f.max} caracteres).`;
       if (f.key.toLowerCase().includes('url') && s && !/^(https:\/\/|\/)\S+$/i.test(s)) return `${name} debe ser un enlace que empiece con https://`;
     } else if (f.kind === 'image') {
+      if (f.optional && v === '') continue;
       if (typeof v !== 'string' || !isImage(v)) return `Elige una foto válida en: ${name}.`;
+    } else if (f.kind === 'number') {
+      if (typeof v !== 'number' || !Number.isFinite(v) || v < f.min || v > f.max) return `${name} debe ser un número entre ${f.min} y ${f.max}.`;
     } else if (f.kind === 'icon') {
       if (!ICONS.some(([id]) => id === v)) return `Elige un ícono en: ${name}.`;
     } else if (f.kind === 'list') {

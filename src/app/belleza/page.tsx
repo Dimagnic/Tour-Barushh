@@ -4,26 +4,26 @@ import { Icon } from '@/components/Icon';
 import { Torn } from '@/components/Torn';
 import { BellezaCatalog } from '@/components/BellezaCatalog';
 import { ExampleNote } from '@/components/ExampleNote';
-import { getGeneral, waLink } from '@/lib/cms';
-import { ingredients } from '@/data/belleza';
+import { getContent, getGeneral, waLink } from '@/lib/cms';
 import { goldBtn, h2, label, wrap } from '@/lib/ui';
 
-export const metadata: Metadata = {
-  title: 'Artículos de belleza naturales y artesanales',
-  description: 'Jabones, cremas, bálsamos y más, hechos a mano con ingredientes naturales. Pregunta por WhatsApp y coordinamos tu pedido.',
-  alternates: { canonical: '/belleza' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getContent('seo');
+  return { title: seo.bellezaTitle, description: seo.bellezaDescription, alternates: { canonical: '/belleza' } };
+}
 
-const pillars = [
+const pillars = (guide: string) => [
   { icon: 'flower' as const, t: 'Naturales', d: 'Ingredientes de origen vegetal como aloe, avena, miel, cacao y flores, elegidos por su aroma y su suavidad.' },
   { icon: 'culture' as const, t: 'Artesanales', d: 'Elaborados a mano en lotes pequeños, con el cuidado de quien conoce cada receta.' },
-  { icon: 'seal' as const, t: 'Con historia', d: 'Nacen del origen de José Carranza, que empezó entre productos naturales y artesanales antes de ser guía.' },
+  { icon: 'seal' as const, t: 'Con historia', d: `Nacen del origen de ${guide}, que empezó entre productos naturales y artesanales antes de ser guía.` },
 ];
 const steps = ['Elige tu producto en el catálogo.', 'Escríbenos por WhatsApp y confirmamos disponibilidad y precio.', 'Coordinamos la entrega o la recolección contigo.'];
 
 export default async function Belleza() {
-  const g = await getGeneral();
+  const [g, beauty, about] = await Promise.all([getGeneral(), getContent('beauty'), getContent('about')]);
   const wa = waLink(g.whatsapp);
+  const split = (t: string) => t.split(',').map((i) => i.trim()).filter(Boolean);
+  const ingredients = [...new Set(beauty.ingredients ? split(beauty.ingredients) : beauty.products.flatMap((p) => split(p.ingredients)))];
   return (
     <>
       <section className="relative overflow-hidden bg-[#06182a] pb-24 pt-40 text-white">
@@ -32,8 +32,8 @@ export default async function Belleza() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,19,33,.94),rgba(4,28,46,.7),rgba(4,28,46,.4))]" />
         <div className={wrap}>
           <p className={`${label} text-gold`}>Hecho a mano</p>
-          <h1 className="max-w-3xl font-display text-[2.8rem] leading-[1.05] md:text-[4.2rem]">Artículos de belleza naturales y artesanales</h1>
-          <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-white/90">Jabones, cremas, bálsamos y aromas elaborados a mano, con ingredientes naturales y mucho cariño.</p>
+          <h1 className="max-w-3xl font-display text-[2.8rem] leading-[1.05] md:text-[4.2rem]">{beauty.heroTitle}</h1>
+          <p className="mt-6 max-w-xl text-[18px] leading-relaxed text-white/90">{beauty.heroText}</p>
           <div className="mt-8"><a href={wa('Hola, quisiera conocer el catálogo de artículos de belleza.')} target="_blank" rel="noopener noreferrer" className={goldBtn}>Pedir el catálogo por WhatsApp →</a></div>
         </div>
       </section>
@@ -44,7 +44,7 @@ export default async function Belleza() {
           <p className={`${label} text-brown`}>Nuestra forma de hacerlo</p>
           <h2 className={h2}>Lo natural, a su ritmo</h2>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
-            {pillars.map((p) => (
+            {pillars(about.guideName).map((p) => (
               <li key={p.t} className="rounded-3xl bg-[#fffdf8] p-7 shadow-[0_8px_28px_rgba(60,40,10,.1)]">
                 <Icon name={p.icon} className="size-11 text-brown" />
                 <h3 className="mt-3 font-display text-[1.7rem]">{p.t}</h3>
@@ -57,7 +57,7 @@ export default async function Belleza() {
           <p className={`${label} text-brown`}>Catálogo</p>
           <h2 className={h2}>Nuestros productos</h2>
           <ExampleNote className="mt-4" />
-          <div className="mt-8"><BellezaCatalog whatsapp={g.whatsapp} /></div>
+          <div className="mt-8"><BellezaCatalog whatsapp={g.whatsapp} products={beauty.products} /></div>
         </div>
       </section>
 

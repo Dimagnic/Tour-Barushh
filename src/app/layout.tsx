@@ -11,22 +11,26 @@ import '@fontsource/caveat/500.css';
 import './globals.css';
 import { site } from '@/data/site';
 import { getContent, getGeneral, waDigits } from '@/lib/cms';
+import { imageUrl } from '@/lib/media';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
 import { HideOnAdmin } from '@/components/HideOnAdmin';
 
-const description = 'Conoce Puebla y sus alrededores de la mano de guías locales: Cholula, pueblos mágicos, tours para grupos y transporte seguro.';
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: { default: 'Tour Barushh | Guías de turismo en Puebla, Cholula y pueblos mágicos', template: `%s | ${site.name}` },
-  description,
-  alternates: { canonical: '/' },
-  openGraph: { title: 'Tour Barushh, guías de turismo en Puebla', description, type: 'website', siteName: site.name, locale: 'es_MX', images: ['/brand/logo.webp'] },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getContent('seo');
+  return {
+    metadataBase: new URL(site.url),
+    title: { default: seo.homeTitle, template: `%s | ${site.name}` },
+    description: seo.homeDescription,
+    alternates: { canonical: '/' },
+    openGraph: { title: 'Tour Barushh, guías de turismo en Puebla', description: seo.homeDescription, type: 'website', siteName: site.name, locale: 'es_MX', images: [seo.shareImage ? imageUrl(seo.shareImage) : '/brand/logo.webp'] },
+  };
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [g, about] = await Promise.all([getGeneral(), getContent('about')]);
+  const [g, about, seo] = await Promise.all([getGeneral(), getContent('about'), getContent('seo')]);
+  const description = seo.homeDescription;
   const phone = `+${waDigits(g.whatsapp)}`;
   const sameAs = Object.values(g.social).filter(Boolean);
   const ld = {

@@ -1,20 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Photo } from '@/components/Photo';
-import { articles } from '@/data/articles';
-import { getGeneral, waLink } from '@/lib/cms';
+import { getContent, getGeneral, waLink } from '@/lib/cms';
 import { goldBtn, h2, label, wrap } from '@/lib/ui';
 
-export const metadata: Metadata = {
-  title: 'Artículos: las bellezas de Puebla',
-  description: 'Historias, consejos y guías sobre el centro histórico de Puebla, Cholula, los pueblos mágicos, la gastronomía y la Talavera.',
-  alternates: { canonical: '/articulos' },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getContent('seo');
+  return { title: seo.articulosTitle, description: seo.articulosDescription, alternates: { canonical: '/articulos' } };
+}
 
 export default async function Articulos() {
-  const g = await getGeneral();
+  const [g, art] = await Promise.all([getGeneral(), getContent('articles')]);
   const wa = waLink(g.whatsapp);
-  const [first, ...rest] = articles;
+  const [first, ...rest] = art.items;
   return (
     <>
       <section className="paper relative pb-24 pt-36 text-ink">
@@ -24,7 +22,7 @@ export default async function Articulos() {
           <p className="mt-5 max-w-2xl text-[17px] leading-relaxed text-ink/80">Historias, consejos y rincones para planear tu viaje, escritos por quienes recorren Puebla todos los días.</p>
 
           <Link href={`/articulos/${first.slug}`} className="group mt-12 grid overflow-hidden rounded-3xl bg-[#fffdf8] shadow-[0_14px_44px_rgba(60,40,10,.16)] lg:grid-cols-[1.15fr_1fr]">
-            <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[420px]"><Photo id={first.cover} sizes="(min-width:1024px) 55vw, 100vw" className="vivid transition duration-500 group-hover:scale-105" /></div>
+            <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[420px]"><Photo id={first.cover} alt={first.title} sizes="(min-width:1024px) 55vw, 100vw" className="vivid transition duration-500 group-hover:scale-105" /></div>
             <div className="flex flex-col justify-center p-8 lg:p-12">
               <p className="text-[12px] font-medium uppercase tracking-[0.25em] text-terra">{first.category} · {first.minutes} min de lectura</p>
               <h2 className="mt-3 font-display text-[2.2rem] leading-[1.1]">{first.title}</h2>

@@ -2,6 +2,8 @@ import { cache } from 'react';
 import { site } from '@/data/site';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials, type IconName } from '@/data/content';
 import { bio, mission, policy, timeline, values, vision } from '@/data/about';
+import { ingredients, products, type Kind } from '@/data/belleza';
+import { articles, toBody } from '@/data/articles';
 
 /**
  * CMS (Supabase): cada sección del sitio es una fila de la tabla `content` (key + data en JSON).
@@ -44,6 +46,14 @@ export interface About {
   videoUrl: string; videoPoster: ImageRef; videoTitle: string; videoText: string;
 }
 export interface LegalDoc { updated: string; body: string }
+export interface Product { name: string; category: string; desc: string; ingredients: string; price: string; photo: ImageRef; kind: Kind; bg: string; fg: string }
+export interface Beauty { heroTitle: string; heroText: string; ingredients: string; products: Product[] }
+export interface ArticleItem { slug: string; title: string; excerpt: string; category: string; minutes: number; cover: ImageRef; body: string }
+export interface Articles { items: ArticleItem[] }
+export interface Seo {
+  homeTitle: string; homeDescription: string; nosotrosTitle: string; nosotrosDescription: string;
+  bellezaTitle: string; bellezaDescription: string; articulosTitle: string; articulosDescription: string; shareImage: ImageRef;
+}
 export interface Testimonials { visible: boolean; label: string; title: string; items: Testimonial[] }
 
 export const defaults = {
@@ -102,6 +112,26 @@ export const defaults = {
   } as About,
   privacy: { updated: '', body: '' } as LegalDoc,
   terms: { updated: '', body: '' } as LegalDoc,
+  beauty: {
+    heroTitle: 'Artículos de belleza naturales y artesanales',
+    heroText: 'Jabones, cremas, bálsamos y aromas elaborados a mano, con ingredientes naturales y mucho cariño.',
+    ingredients: ingredients.join(', '),
+    products: products.map((p) => ({ name: p.name, category: p.category, desc: p.desc, ingredients: p.ingredients.join(', '), price: '', photo: '', kind: p.kind, bg: p.bg, fg: p.fg })),
+  } as Beauty,
+  articles: {
+    items: articles.map((a) => ({ slug: a.slug, title: a.title, excerpt: a.excerpt, category: a.category, minutes: a.minutes, cover: a.cover, body: toBody(a.blocks) })),
+  } as Articles,
+  seo: {
+    homeTitle: 'Tour Barushh | Guías de turismo en Puebla, Cholula y pueblos mágicos',
+    homeDescription: 'Conoce Puebla y sus alrededores de la mano de guías locales: Cholula, pueblos mágicos, tours para grupos y transporte seguro.',
+    nosotrosTitle: 'Nosotros: historia, misión, visión y política',
+    nosotrosDescription: 'Conoce al guía fundador de Tour Barushh, su historia, la misión y visión de la empresa y nuestra política de servicio.',
+    bellezaTitle: 'Artículos de belleza naturales y artesanales',
+    bellezaDescription: 'Jabones, cremas, bálsamos y más, hechos a mano con ingredientes naturales. Pregunta por WhatsApp y coordinamos tu pedido.',
+    articulosTitle: 'Artículos: las bellezas de Puebla',
+    articulosDescription: 'Historias, consejos y guías sobre el centro histórico de Puebla, Cholula, los pueblos mágicos, la gastronomía y la Talavera.',
+    shareImage: '',
+  } as Seo,
 };
 export type Content = typeof defaults;
 export type ContentKey = keyof Content;

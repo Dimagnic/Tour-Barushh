@@ -11,3 +11,5 @@ export const findPhoto = (id: string) => library.find((p) => p.id === id);
 export const isValidImage = (v: string) => Boolean(findPhoto(v)) || (MEDIA_PREFIX.length > 40 && v.startsWith(MEDIA_PREFIX));
 /** Miniatura para el panel. */
 export const previewSrc = (v: string) => findPhoto(v)?.thumb ?? (isUpload(v) ? v : '');
+/** Ruta o URL completa de una foto (para metadatos y datos estructurados). */
+export const imageUrl = (v: string) => findPhoto(v)?.src ?? v;

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Photo, getPhoto } from '@/components/Photo';
-import { articles, getArticle, slugify } from '@/data/articles';
+import { Photo } from '@/components/Photo';
+import { articles, parseBody, slugify } from '@/data/articles';
+import { imageUrl } from '@/lib/media';
 import { site } from '@/data/site';
-import { getGeneral, waLink } from '@/lib/cms';
+import { getContent, getGeneral, waLink } from '@/lib/cms';
 import { goldBtn, label } from '@/lib/ui';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -13,25 +14,33 @@ export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
 
+/** Artículo guardado en el panel (o de los valores por defecto) según su dirección. */
+async function find(slug: string) {
+  const art = await getContent('articles');
+  return { a: art.items.find((x) => x.slug === slug), all: art.items };
+}
+const absolute = (ref: string) => { const u = imageUrl(ref); return /^https?:/.test(u) ? u : `${site.url}${u}`; };
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const a = getArticle(slug);
+  const { a } = await find(slug);
   if (!a) return {};
   return {
     title: a.title, description: a.excerpt, alternates: { canonical: `/articulos/${a.slug}` },
-    openGraph: { title: a.title, description: a.excerpt, type: 'article', images: [getPhoto(a.cover).src] },
+    openGraph: { title: a.title, description: a.excerpt, type: 'article', images: [absolute(a.cover)] },
   };
 }
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const a = getArticle(slug);
+  const { a, all } = await find(slug);
   if (!a) notFound();
+  const blocks = parseBody(a.body);
   const g = await getGeneral();
   const wa = waLink(g.whatsapp);
-  const heads = a.blocks.filter((b): b is { h: string } => 'h' in b);
-  const related = articles.filter((x) => x.slug !== a.slug).slice(0, 3);
-  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.excerpt, inLanguage: 'es', image: `${site.url}${getPhoto(a.cover).src}`, author: { '@type': 'Organization', name: site.name }, publisher: { '@type': 'Organization', name: site.name } };
+  const heads = blocks.filter((b): b is { h: string } => 'h' in b);
+  const related = all.filter((x) => x.slug !== a.slug).slice(0, 3);
+  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.excerpt, inLanguage: 'es', image: absolute(a.cover), author: { '@type': 'Organization', name: site.name }, publisher: { '@type': 'Organization', name: site.name } };
   let firstP = true;
   return (
     <>
@@ -58,7 +67,7 @@ export default async function ArticlePage({ params }: Props) {
               </ol>
             </nav>
           ) : null}
-          {a.blocks.map((b, i) => {
+          {blocks.map((b, i) => {
             if ('h' in b) return <h2 key={i} id={slugify(b.h)} className="mb-3 mt-12 font-display text-[2rem] leading-tight md:text-[2.3rem]">{b.h}</h2>;
             if ('q' in b) return <blockquote key={i} className="my-10 border-l-4 border-gold pl-6 font-title text-[1.5rem] italic leading-snug text-ink">“{b.q}”</blockquote>;
             if ('ul' in b) return <ul key={i} className="my-5 space-y-2.5 text-[18px] leading-8 text-ink/85">{b.ul.map((li) => <li key={li} className="flex gap-3 before:mt-3 before:size-2 before:shrink-0 before:rounded-full before:bg-gold">{li}</li>)}</ul>;
