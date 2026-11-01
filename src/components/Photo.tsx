@@ -10,10 +10,12 @@ export function getPhoto(id: string): PhotoData {
   return p;
 }
 
-/** Rellena el contenedor padre (que debe ser `relative` y tener proporción definida). */
-export function Photo({ id, sizes, priority, thumb, className = '' }: {
-  id: string; sizes: string; priority?: boolean; thumb?: boolean; className?: string;
+/** Rellena el contenedor padre (que debe ser `relative` y tener proporción definida).
+ *  `id` es una foto de la biblioteca o la URL de una foto subida desde el panel. */
+export function Photo({ id, sizes, priority, thumb, className = '', alt }: {
+  id: string; sizes: string; priority?: boolean; thumb?: boolean; className?: string; alt?: string;
 }) {
-  const p = getPhoto(id);
-  return <Image src={thumb ? p.thumb : p.src} alt={p.es} fill sizes={sizes} priority={priority} className={`object-cover ${className}`} />;
+  if (/^https?:\/\//.test(id)) return <Image src={id} alt={alt ?? ''} fill sizes={sizes} priority={priority} className={`object-cover ${className}`} />;
+  const p = list.find((x) => x.id === id) ?? list[0];
+  return <Image src={thumb ? p.thumb : p.src} alt={alt || p.es} fill sizes={sizes} priority={priority} className={`object-cover ${className}`} />;
 }

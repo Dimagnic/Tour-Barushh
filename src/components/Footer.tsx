@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { nav, site } from '@/data/site';
-import { getGeneral, waDigits } from '@/lib/cms';
-import { experiences } from '@/data/content';
+import { getContent, getGeneral, waDigits } from '@/lib/cms';
 
 const icons: Record<string, React.ReactNode> = {
   instagram: <g fill="none" stroke="currentColor" strokeWidth="1.800"><rect x="4" y="4" width="16" height="16" rx="5" /><circle cx="12" cy="12" r="3.800" /><circle cx="17" cy="7" r=".6" fill="currentColor" /></g>,
@@ -12,7 +11,7 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 export async function Footer() {
-  const g = await getGeneral();
+  const [g, exp] = await Promise.all([getGeneral(), getContent('experiences')]);
   const social: Record<string, string> = g.social;
   const head = 'mb-5 text-sm font-bold uppercase tracking-[0.14em] text-gold';
   const link = 'block py-1.5 hover:text-white';
@@ -44,7 +43,7 @@ export async function Footer() {
         </nav>
         <div>
           <h2 className={head}>Experiencias</h2>
-          {experiences.map((e) => <Link key={e.title} className={link} href="/#experiencias">{e.title}</Link>)}
+          {exp.items.map((e, i) => <Link key={`${e.title}-${i}`} className={link} href="/#experiencias">{e.title}</Link>)}
           <Link className={link} href="/articulos">Artículos de viaje</Link>
         </div>
         <div>

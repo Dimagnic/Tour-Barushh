@@ -7,6 +7,10 @@ export default async function Dashboard() {
   const last = data?.[0];
   const cards: [string, string, string][] = [
     ['/admin/general', 'Datos generales', 'WhatsApp, correo, horario, redes sociales, mensajes y asistente virtual.'],
+    ['/admin/portada', 'Encabezado y portada', 'Título principal, foto de fondo, video y ventajas.'],
+    ['/admin/experiencias', 'Experiencias', 'Textos de la sección y tarjetas del carrusel con sus fotos.'],
+    ['/admin/galeria', 'Galería', 'Sube, quita y ordena las fotos del carrusel.'],
+    ['/admin/testimonios', 'Testimonios', 'Agrega, edita u oculta las opiniones de viajeros.'],
     ['/admin/tarjeta', 'Tarjeta de presentación', 'Descarga tu tarjeta en PDF o imagen, con código QR.'],
   ];
   return (

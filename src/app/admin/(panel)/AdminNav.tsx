@@ -2,8 +2,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const ready: [string, string][] = [['/admin', 'Inicio'], ['/admin/general', 'Datos generales'], ['/admin/tarjeta', 'Tarjeta de presentación']];
-const soon = ['Encabezado y portada', 'Experiencias', 'Galería', 'Testimonios', 'Nosotros', 'Belleza', 'Artículos', 'Textos legales', 'SEO'];
+const ready: [string, string][] = [
+  ['/admin', 'Inicio'], ['/admin/general', 'Datos generales'], ['/admin/portada', 'Encabezado y portada'],
+  ['/admin/experiencias', 'Experiencias'], ['/admin/galeria', 'Galería'], ['/admin/testimonios', 'Testimonios'], ['/admin/tarjeta', 'Tarjeta de presentación'],
+];
+const soon = ['Vive la experiencia y Esencia', 'Contacto', 'Nosotros', 'Belleza', 'Artículos', 'Textos legales', 'SEO'];
 
 export function AdminNav() {
   const path = usePathname();

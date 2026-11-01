@@ -6,7 +6,7 @@ import { ExampleNote } from '@/components/ExampleNote';
 import { VideoModal } from '@/components/VideoModal';
 import { videoSource } from '@/lib/video';
 import { site } from '@/data/site';
-import { getGeneral, waLink } from '@/lib/cms';
+import { getContent, getGeneral, waLink } from '@/lib/cms';
 import { bio, mission, policy, timeline, values, vision } from '@/data/about';
 import { darkBtn, goldBtn, h2, label, wrap } from '@/lib/ui';
 
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
 export default async function Nosotros() {
   const g = await getGeneral();
   const wa = waLink(g.whatsapp);
-  const video = site.videoInstitucional || site.videoUrl;
+  const hero = await getContent('hero');
+  const video = site.videoInstitucional || hero.videoUrl;
   const ready = videoSource(video) !== null;
   return (
     <>

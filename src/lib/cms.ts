@@ -1,5 +1,6 @@
 import { cache } from 'react';
 import { site } from '@/data/site';
+import { experiences, gallery, heroFeatures, testimonials, type IconName } from '@/data/content';
 
 /**
  * CMS (Supabase): cada sección del sitio es una fila de la tabla `content` (key + data en JSON).
@@ -23,7 +24,18 @@ export interface General {
   exampleContent: boolean;
 }
 
-export const defaults: { general: General } = {
+/** Una foto: id de la biblioteca del sitio (src/data/photos.json) o URL de una foto subida al panel. */
+export type ImageRef = string;
+export interface Feature { icon: IconName; t: string }
+export interface Hero { line1: string; highlight: string; line3: string; subtitle: string; ctaLabel: string; photo: ImageRef; videoUrl: string; features: Feature[] }
+export interface Experience { place: string; title: string; text: string; photo: ImageRef }
+export interface Experiences { label: string; title: string; text: string; script: string; photoA: ImageRef; photoB: ImageRef; items: Experience[] }
+export interface GalleryItem { photo: ImageRef; alt: string }
+export interface Gallery { label: string; title: string; script: string; items: GalleryItem[] }
+export interface Testimonial { name: string; text: string }
+export interface Testimonials { visible: boolean; label: string; title: string; items: Testimonial[] }
+
+export const defaults = {
   general: {
     whatsapp: site.whatsappDisplay,
     email: site.email,
@@ -33,7 +45,27 @@ export const defaults: { general: General } = {
     reserveMessage: 'Hola, quiero reservar una experiencia con Tour Barushh.',
     clienteaiToken: site.clienteaiToken,
     exampleContent: site.exampleContent,
-  },
+  } as General,
+  hero: {
+    line1: 'Más que un tour,', highlight: 'una experiencia', line3: 'que se vive.',
+    subtitle: 'Conoce Puebla y sus alrededores de la mano de guías locales que aman su tierra, su historia y su gente.',
+    ctaLabel: 'Reserva tu experiencia', photo: 'vista-pueblo-iglesia', videoUrl: site.videoUrl,
+    features: heroFeatures,
+  } as Hero,
+  experiences: {
+    label: 'Experiencias únicas', title: 'Tours que\ncuentan historias',
+    text: 'Recorre pueblos mágicos, paisajes increíbles, tradiciones vivas y una gastronomía que enamora.',
+    script: 'Puebla y sus alrededores como nunca los has visto', photoA: 'grupo-mural', photoB: 'grupo-mirador',
+    items: experiences,
+  } as Experiences,
+  gallery: {
+    label: 'Galería', title: 'Momentos\nque se quedan', script: 'Experiencias\nreales',
+    items: gallery.map((photo) => ({ photo, alt: '' })),
+  } as Gallery,
+  testimonials: {
+    visible: true, label: 'Testimonios', title: 'Viajeros que\nviven y recomiendan',
+    items: testimonials,
+  } as Testimonials,
 };
 export type Content = typeof defaults;
 export type ContentKey = keyof Content;
@@ -46,7 +78,11 @@ export const CMS_REVALIDATE = 60;
 /** Combina lo guardado con los valores por defecto: solo acepta campos conocidos y del mismo tipo. */
 function merge<T>(base: T, saved: unknown): T {
   if (saved === undefined || saved === null) return base;
-  if (Array.isArray(base)) return (Array.isArray(saved) ? saved : base) as T;
+  if (Array.isArray(base)) {
+    if (!Array.isArray(saved)) return base;
+    if (base.length === 0) return saved as T;
+    return saved.filter((x) => x !== null && x !== undefined).map((x) => merge(base[0], x)) as T;
+  }
   if (typeof base === 'object' && base !== null) {
     if (typeof saved !== 'object' || Array.isArray(saved)) return base;
     const out = { ...(base as Record<string, unknown>) };

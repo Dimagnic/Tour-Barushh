@@ -3,6 +3,8 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getAdmin, supabaseServer } from '@/lib/supabase/server';
 import { type General, withDefaults } from '@/lib/cms';
+import { isSectionKey, schemas, validate } from '@/lib/cms-schema';
+import { isValidImage } from '@/lib/media';
 
 export type SaveState = { ok: boolean; message: string } | null;
 
@@ -38,6 +40,22 @@ export async function saveGeneral(_prev: SaveState, form: FormData): Promise<Sav
   if (data.clienteaiToken && !/^[a-z0-9]{8,64}$/i.test(data.clienteaiToken)) return { ok: false, message: 'El token de ClienteAI solo lleva letras y números.' };
   if (!data.floatingMessage || !data.reserveMessage) return { ok: false, message: 'Los mensajes de WhatsApp no pueden quedar vacíos.' };
   return saveContent('general', data);
+}
+
+/** Quita espacios sobrantes en todos los textos. */
+const tidy = (v: unknown): unknown =>
+  typeof v === 'string' ? v.replace(/\r\n/g, '\n').trim()
+  : Array.isArray(v) ? v.map(tidy)
+  : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, tidy(x)]))
+  : v;
+
+/** Guarda una sección editada con el formulario genérico (portada, experiencias, galería, testimonios…). */
+export async function saveSection(key: string, data: unknown): Promise<SaveState> {
+  if (!isSectionKey(key)) return { ok: false, message: 'Sección desconocida.' };
+  const clean = withDefaults(key, tidy(data)) as unknown as Record<string, unknown>;
+  const err = validate(schemas[key].groups.flatMap((g) => g.fields), clean, isValidImage);
+  if (err) return { ok: false, message: err };
+  return saveContent(key, clean);
 }
 
 export async function signOut() {
