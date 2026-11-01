@@ -93,8 +93,8 @@ async function drawBack(cv: HTMLCanvasElement, i: Info, mode: QrMode) {
 const toBlob = (cv: HTMLCanvasElement) => new Promise<Blob>((res) => cv.toBlob((b) => res(b!), 'image/png'));
 function save(blob: Blob, name: string) { const u = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); }
 
-export function CardStudio({ phone, email }: { phone?: string; email?: string } = {}) {
-  const DEFAULTS: Info = { ...BASE, ...(phone ? { phone } : {}), ...(email ? { email } : {}) };
+export function CardStudio({ phone, email, name, role }: { phone?: string; email?: string; name?: string; role?: string } = {}) {
+  const DEFAULTS: Info = { ...BASE, ...(phone ? { phone } : {}), ...(email ? { email } : {}), ...(name ? { name } : {}), ...(role ? { role } : {}) };
   const front = useRef<HTMLCanvasElement>(null);
   const back = useRef<HTMLCanvasElement>(null);
   const [info, setInfo] = useState<Info>(DEFAULTS);

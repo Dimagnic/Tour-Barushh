@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { site } from '@/data/site';
-import { experiences, gallery, heroFeatures, testimonials, type IconName } from '@/data/content';
+import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials, type IconName } from '@/data/content';
+import { bio, mission, policy, timeline, values, vision } from '@/data/about';
 
 /**
  * CMS (Supabase): cada sección del sitio es una fila de la tabla `content` (key + data en JSON).
@@ -29,10 +30,20 @@ export type ImageRef = string;
 export interface Feature { icon: IconName; t: string }
 export interface Hero { line1: string; highlight: string; line3: string; subtitle: string; ctaLabel: string; photo: ImageRef; videoUrl: string; features: Feature[] }
 export interface Experience { place: string; title: string; text: string; photo: ImageRef }
-export interface Experiences { label: string; title: string; text: string; script: string; photoA: ImageRef; photoB: ImageRef; items: Experience[] }
+export interface Experiences { visible: boolean; label: string; title: string; text: string; script: string; photoA: ImageRef; photoB: ImageRef; items: Experience[] }
 export interface GalleryItem { photo: ImageRef; alt: string }
-export interface Gallery { label: string; title: string; script: string; items: GalleryItem[] }
+export interface Gallery { visible: boolean; label: string; title: string; script: string; items: GalleryItem[] }
 export interface Testimonial { name: string; text: string }
+export interface Living { visible: boolean; label: string; title: string; text: string; ctaLabel: string; ctaMessage: string; photo: ImageRef; script: string; items: Feature[] }
+export interface Essence { visible: boolean; label: string; title: string; text: string; highlight: string; text2: string; ctaLabel: string; photo: ImageRef; items: Feature[] }
+export interface Contact { title: string; text: string; ctaLabel: string; ctaMessage: string; photo: ImageRef; items: Feature[] }
+export interface Step { t: string; d: string }
+export interface About {
+  guideName: string; guideRole: string; photo: ImageRef; photo2: ImageRef; title: string; bio: string;
+  timeline: Step[]; mission: string; vision: string; values: { v: string }[]; policy: Step[];
+  videoUrl: string; videoPoster: ImageRef; videoTitle: string; videoText: string;
+}
+export interface LegalDoc { updated: string; body: string }
 export interface Testimonials { visible: boolean; label: string; title: string; items: Testimonial[] }
 
 export const defaults = {
@@ -53,19 +64,44 @@ export const defaults = {
     features: heroFeatures,
   } as Hero,
   experiences: {
-    label: 'Experiencias únicas', title: 'Tours que\ncuentan historias',
+    visible: true, label: 'Experiencias únicas', title: 'Tours que\ncuentan historias',
     text: 'Recorre pueblos mágicos, paisajes increíbles, tradiciones vivas y una gastronomía que enamora.',
     script: 'Puebla y sus alrededores como nunca los has visto', photoA: 'grupo-mural', photoB: 'grupo-mirador',
     items: experiences,
   } as Experiences,
   gallery: {
-    label: 'Galería', title: 'Momentos\nque se quedan', script: 'Experiencias\nreales',
+    visible: true, label: 'Galería', title: 'Momentos\nque se quedan', script: 'Experiencias\nreales',
     items: gallery.map((photo) => ({ photo, alt: '' })),
   } as Gallery,
   testimonials: {
     visible: true, label: 'Testimonios', title: 'Viajeros que\nviven y recomiendan',
     items: testimonials,
   } as Testimonials,
+  living: {
+    visible: true, label: 'Vive la experiencia', title: 'Lugares increíbles,\nhistorias inolvidables',
+    text: 'Te llevamos a descubrir la riqueza cultural, natural y gastronómica de nuestra región, con experiencias diseñadas para conectar de verdad con cada destino.',
+    ctaLabel: 'Reserva tu tour', ctaMessage: 'Hola, quiero reservar un tour con Tour Barushh.', photo: 'calle-pueblo-grupo', script: 'Viaja en buena compañía',
+    items: living,
+  } as Living,
+  essence: {
+    visible: true, label: 'Nuestra esencia', title: 'Personas que\nhacen la diferencia',
+    text: 'Somos un equipo de guías apasionados por compartir', highlight: 'la historia, la cultura y la belleza de Puebla.',
+    text2: 'Cada tour está pensado para que vivas una experiencia auténtica, segura y llena de momentos especiales.',
+    ctaLabel: 'Conoce nuestra historia', photo: 'iglesia-talavera', items: essence,
+  } as Essence,
+  contact: {
+    title: '¿Listo para vivir\nesta experiencia?', text: 'Cuéntanos qué tipo de tour te interesa y te ayudamos a planear un viaje inolvidable.',
+    ctaLabel: 'Cotiza por WhatsApp', ctaMessage: 'Hola, quisiera cotizar un tour con Tour Barushh.', photo: 'vista-pueblo-iglesia', items: ctaList,
+  } as Contact,
+  about: {
+    guideName: site.guide.name, guideRole: site.guide.role, photo: site.guide.photo, photo2: site.guide.photo2,
+    title: 'De los productos artesanales a guiar a viajeros de todo el mundo', bio: bio.join('\n\n'),
+    timeline, mission, vision, values: values.map((v) => ({ v })), policy,
+    videoUrl: site.videoInstitucional, videoPoster: site.videoPoster, videoTitle: 'Conócenos en video',
+    videoText: 'Mira cómo vivimos cada recorrido: los lugares, la gente y la forma en que cuidamos a cada viajero.',
+  } as About,
+  privacy: { updated: '', body: '' } as LegalDoc,
+  terms: { updated: '', body: '' } as LegalDoc,
 };
 export type Content = typeof defaults;
 export type ContentKey = keyof Content;

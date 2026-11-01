@@ -20,7 +20,7 @@ function FieldView({ f, value, onChange, id }: { f: Field; value: unknown; onCha
       <div>
         <label htmlFor={id} className={lab}>{f.label}{f.required ? '' : ' (opcional)'}</label>
         {f.multiline
-          ? <textarea {...common} rows={Math.min(6, Math.max(2, Math.ceil(f.max / 70)))} onChange={(e) => onChange(e.target.value)} />
+          ? <textarea {...common} rows={f.max >= 2000 ? 16 : Math.min(6, Math.max(2, Math.ceil(f.max / 70)))} onChange={(e) => onChange(e.target.value)} />
           : <input {...common} onChange={(e) => onChange(e.target.value)} />}
         <p className={hint}>{f.help ? `${f.help} · ` : ''}{v.length}/{f.max}</p>
       </div>

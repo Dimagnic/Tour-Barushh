@@ -11,6 +11,12 @@ export default async function Dashboard() {
     ['/admin/experiencias', 'Experiencias', 'Textos de la sección y tarjetas del carrusel con sus fotos.'],
     ['/admin/galeria', 'Galería', 'Sube, quita y ordena las fotos del carrusel.'],
     ['/admin/testimonios', 'Testimonios', 'Agrega, edita u oculta las opiniones de viajeros.'],
+    ['/admin/vive', 'Vive la experiencia', 'Sección azul con foto polaroid, botón e íconos.'],
+    ['/admin/esencia', 'Nuestra esencia', 'Texto, foto e íconos de “Personas que hacen la diferencia”.'],
+    ['/admin/contacto', 'Contacto', 'La llamada final con el botón de WhatsApp y sus beneficios.'],
+    ['/admin/nosotros', 'Nosotros', 'Guía, biografía, video, trayectoria, misión, visión, valores y política.'],
+    ['/admin/privacidad', 'Aviso de privacidad', 'Texto legal obligatorio por el manejo de datos personales.'],
+    ['/admin/terminos', 'Términos y condiciones', 'Reservas, pagos, cancelaciones y responsabilidades.'],
     ['/admin/tarjeta', 'Tarjeta de presentación', 'Descarga tu tarjeta en PDF o imagen, con código QR.'],
   ];
   return (

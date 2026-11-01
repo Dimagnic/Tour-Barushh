@@ -7,11 +7,13 @@ import { Torn } from '@/components/Torn';
 import { VideoModal } from '@/components/VideoModal';
 import { Lines } from '@/components/Lines';
 import { getContent, getGeneral, waLink } from '@/lib/cms';
-import { ctaList, essence, living } from '@/data/content';
 import { darkBtn as dark, goldBtn as gold, h2Home as h2, label, wrap } from '@/lib/ui';
 
 export default async function Home() {
-  const [g, hero, exp, gal, tes] = await Promise.all([getGeneral(), getContent('hero'), getContent('experiences'), getContent('gallery'), getContent('testimonials')]);
+  const [g, hero, exp, gal, tes, liv, ess, con] = await Promise.all([
+    getGeneral(), getContent('hero'), getContent('experiences'), getContent('gallery'), getContent('testimonials'),
+    getContent('living'), getContent('essence'), getContent('contact'),
+  ]);
   const wa = waLink(g.whatsapp);
   const reserve = wa(g.reserveMessage);
   return (
@@ -45,6 +47,7 @@ export default async function Home() {
       </section>
 
       {/* EXPERIENCIAS ÚNICAS */}
+      {exp.visible ? (
       <section id="experiencias" className="relative z-10 -mt-14 overflow-x-clip pb-24 text-ink">
         <Torn className="paper" />
         <div aria-hidden="true" className="talavera absolute left-0 top-[330px] hidden h-44 w-14 rounded-r-[60px] opacity-95 lg:block" />
@@ -83,7 +86,10 @@ export default async function Home() {
         </div>
       </section>
 
+      ) : null}
+
       {/* VIVE LA EXPERIENCIA */}
+      {liv.visible ? (
       <section className="relative z-20 -mt-12 overflow-x-clip text-white">
         <Torn b className="bg-[#06182a]">
           <Photo id="cascada-lejana" sizes="100vw" className="vivid object-[50%_30%]" />
@@ -92,42 +98,48 @@ export default async function Home() {
         </Torn>
         <div className={`${wrap} grid items-center gap-12 pb-24 pt-28 lg:grid-cols-[1fr_1.05fr]`}>
           <div className="relative">
-            <p className={`${label} text-gold`}>Vive la experiencia</p>
-            <h2 className={h2}>Lugares increíbles,<br />historias inolvidables</h2>
-            <p className="mt-6 max-w-[470px] text-[17px] leading-relaxed text-white/90">Te llevamos a descubrir la riqueza cultural, natural y gastronómica de nuestra región, con experiencias diseñadas para conectar de verdad con cada destino.</p>
-            <a href={wa('Hola, quiero reservar un tour con Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${gold} mt-8`}>Reserva tu tour →</a>
+            <p className={`${label} text-gold`}>{liv.label}</p>
+            <h2 className={h2}><Lines text={liv.title} /></h2>
+            <p className="mt-6 max-w-[470px] text-[17px] leading-relaxed text-white/90">{liv.text}</p>
+            <a href={wa(liv.ctaMessage)} target="_blank" rel="noopener noreferrer" className={`${gold} mt-8`}>{liv.ctaLabel} →</a>
             <ul className="mt-10 grid max-w-[560px] grid-cols-2 gap-6 sm:grid-cols-4">
-              {living.map((l) => <li key={l.t} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
+              {liv.items.map((l, i) => <li key={`${l.t}-${i}`} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
             </ul>
           </div>
           <div className="relative">
             <CurvedArrow className="absolute -left-14 -top-14 hidden w-24 -rotate-12 text-gold lg:block" />
-            <figure className="polaroid -rotate-[3deg] lg:-mr-16"><div className="relative aspect-[4/3]"><Photo id="calle-pueblo-grupo" sizes="(min-width:1024px) 52vw, 100vw" className="vivid" /></div></figure>
-            <p className="absolute -left-4 bottom-10 hidden max-w-[150px] -rotate-6 font-script text-[1.6rem] leading-tight text-white lg:block">Viaja en buena compañía</p>
+            <figure className="polaroid -rotate-[3deg] lg:-mr-16"><div className="relative aspect-[4/3]"><Photo id={liv.photo} sizes="(min-width:1024px) 52vw, 100vw" className="vivid" /></div></figure>
+            <p className="absolute -left-4 bottom-10 hidden max-w-[150px] -rotate-6 font-script text-[1.6rem] leading-tight text-white lg:block">{liv.script}</p>
           </div>
         </div>
       </section>
 
+      ) : null}
+
       {/* NUESTRA ESENCIA */}
+      {ess.visible ? (
       <section id="nosotros" className="relative z-30 -mt-12 overflow-x-clip text-ink">
         <Torn className="paper" />
         <div className="relative grid items-center lg:grid-cols-[1fr_1fr]">
-          <div className="relative h-[380px] sm:h-[480px] lg:h-[620px]"><div className="torn-photo absolute inset-0 top-10 overflow-hidden"><Photo id="iglesia-talavera" sizes="(min-width:1024px) 50vw, 100vw" className="vivid object-[50%_30%]" /></div></div>
+          <div className="relative h-[380px] sm:h-[480px] lg:h-[620px]"><div className="torn-photo absolute inset-0 top-10 overflow-hidden"><Photo id={ess.photo} sizes="(min-width:1024px) 50vw, 100vw" className="vivid object-[50%_30%]" /></div></div>
           <div className="relative max-w-[680px] px-5 py-20 lg:px-14">
             <Stamp id="st2" text="CULTURA · NATURALEZA · GASTRONOMÍA · GENTE · " className="absolute right-6 top-10 hidden size-[118px] text-ink/45 xl:block"><MountainMark /></Stamp>
             <Leaves className="absolute -right-5 bottom-24 hidden h-44 opacity-80 lg:block" />
-            <p className={`${label} text-brown`}>Nuestra esencia</p>
-            <h2 className={h2}>Personas que<br />hacen la diferencia</h2>
-            <p className="mt-6 max-w-[500px] text-[17px] leading-relaxed text-ink/75">Somos un equipo de guías apasionados por compartir <span className="text-ink">la historia, la cultura y la belleza de Puebla.</span> Cada tour está pensado para que vivas una experiencia auténtica, segura y llena de momentos especiales.</p>
-            <Link href="/nosotros" className={`${dark} mt-8`}>Conoce nuestra historia →</Link>
+            <p className={`${label} text-brown`}>{ess.label}</p>
+            <h2 className={h2}><Lines text={ess.title} /></h2>
+            <p className="mt-6 max-w-[500px] text-[17px] leading-relaxed text-ink/75">{ess.text}{ess.highlight ? <> <span className="text-ink">{ess.highlight}</span></> : null}{ess.text2 ? ` ${ess.text2}` : null}</p>
+            <Link href="/nosotros" className={`${dark} mt-8`}>{ess.ctaLabel} →</Link>
             <ul className="mt-10 grid max-w-[560px] grid-cols-2 gap-6 sm:grid-cols-4">
-              {essence.map((l) => <li key={l.t} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
+              {ess.items.map((l, i) => <li key={`${l.t}-${i}`} className="flex flex-col items-center gap-3 text-center text-[12px] font-medium"><Icon name={l.icon} className="size-11" />{l.t}</li>)}
             </ul>
           </div>
         </div>
       </section>
 
+      ) : null}
+
       {/* GALERÍA */}
+      {gal.visible ? (
       <section id="galeria" className="relative z-40 -mt-10 overflow-x-clip text-white">
         <Torn b className="bg-[#06182a]">
           <Photo id="cascada-lejana" sizes="100vw" className="vivid object-[50%_70%]" />
@@ -147,6 +159,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      ) : null}
 
       {/* TESTIMONIOS */}
       {tes.visible && tes.items.length ? (
@@ -174,13 +188,13 @@ export default async function Home() {
       <section id="contacto" className="relative z-[60] grid bg-navy text-white lg:grid-cols-[120px_1.45fr_0.9fr_1.05fr]">
         <div aria-hidden="true" className="talavera h-16 lg:h-auto" />
         <div className="px-6 py-14 lg:px-12 lg:py-16">
-          <h2 className="font-display text-[2.4rem] leading-tight md:text-[3rem]">¿Listo para vivir<br />esta experiencia?</h2>
-          <p className="mt-4 max-w-[420px] text-[15px] text-white/85">Cuéntanos qué tipo de tour te interesa y te ayudamos a planear un viaje inolvidable.</p>
-          <a href={wa('Hola, quisiera cotizar un tour con Tour Barushh.')} target="_blank" rel="noopener noreferrer" className={`${gold} mt-7`}><Icon name="whatsapp" className="size-6" />Cotiza por WhatsApp →</a>
+          <h2 className="font-display text-[2.4rem] leading-tight md:text-[3rem]"><Lines text={con.title} /></h2>
+          <p className="mt-4 max-w-[420px] text-[15px] text-white/85">{con.text}</p>
+          <a href={wa(con.ctaMessage)} target="_blank" rel="noopener noreferrer" className={`${gold} mt-7`}><Icon name="whatsapp" className="size-6" />{con.ctaLabel} →</a>
         </div>
-        <div className="relative min-h-[260px]"><Photo id="vista-pueblo-iglesia" thumb sizes="(min-width:1024px) 25vw, 100vw" className="vivid object-[50%_72%]" /></div>
+        <div className="relative min-h-[260px]"><Photo id={con.photo} thumb sizes="(min-width:1024px) 25vw, 100vw" className="vivid object-[50%_72%]" /></div>
         <ul className="flex flex-col justify-center gap-6 px-6 py-12 lg:px-10">
-          {ctaList.map((c) => <li key={c.t} className="flex items-center gap-4 text-[14px] font-medium"><Icon name={c.icon} className="size-9 shrink-0" />{c.t}</li>)}
+          {con.items.map((c, i) => <li key={`${c.t}-${i}`} className="flex items-center gap-4 text-[14px] font-medium"><Icon name={c.icon} className="size-9 shrink-0" />{c.t}</li>)}
         </ul>
       </section>
     </>

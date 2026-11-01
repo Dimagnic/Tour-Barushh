@@ -4,14 +4,16 @@ import { usePathname } from 'next/navigation';
 
 const ready: [string, string][] = [
   ['/admin', 'Inicio'], ['/admin/general', 'Datos generales'], ['/admin/portada', 'Encabezado y portada'],
-  ['/admin/experiencias', 'Experiencias'], ['/admin/galeria', 'Galería'], ['/admin/testimonios', 'Testimonios'], ['/admin/tarjeta', 'Tarjeta de presentación'],
+  ['/admin/experiencias', 'Experiencias'], ['/admin/vive', 'Vive la experiencia'], ['/admin/esencia', 'Nuestra esencia'], ['/admin/galeria', 'Galería'],
+  ['/admin/testimonios', 'Testimonios'], ['/admin/contacto', 'Contacto'], ['/admin/nosotros', 'Nosotros'], ['/admin/privacidad', 'Aviso de privacidad'],
+  ['/admin/terminos', 'Términos y condiciones'], ['/admin/tarjeta', 'Tarjeta de presentación'],
 ];
-const soon = ['Vive la experiencia y Esencia', 'Contacto', 'Nosotros', 'Belleza', 'Artículos', 'Textos legales', 'SEO'];
+const soon = ['Belleza', 'Artículos', 'SEO'];
 
 export function AdminNav() {
   const path = usePathname();
   return (
-    <nav aria-label="Panel" className="mt-8">
+    <nav aria-label="Panel" className="mt-8 lg:-mx-2 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:px-2">
       <ul className="space-y-1">
         {ready.map(([href, label]) => {
           const on = href === '/admin' ? path === '/admin' : path.startsWith(href);

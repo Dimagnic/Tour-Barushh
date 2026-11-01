@@ -10,7 +10,7 @@ import '@fontsource/dm-sans/600.css';
 import '@fontsource/caveat/500.css';
 import './globals.css';
 import { site } from '@/data/site';
-import { getGeneral, waDigits } from '@/lib/cms';
+import { getContent, getGeneral, waDigits } from '@/lib/cms';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const g = await getGeneral();
+  const [g, about] = await Promise.all([getGeneral(), getContent('about')]);
   const phone = `+${waDigits(g.whatsapp)}`;
   const sameAs = Object.values(g.social).filter(Boolean);
   const ld = {
@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     address: { '@type': 'PostalAddress', addressLocality: 'Puebla', addressRegion: 'Puebla', addressCountry: 'MX' },
     areaServed: [{ '@type': 'City', name: 'Puebla' }, { '@type': 'City', name: 'Cholula' }, { '@type': 'State', name: 'Puebla' }],
     contactPoint: { '@type': 'ContactPoint', telephone: phone, contactType: 'reservations', availableLanguage: ['es'] },
-    founder: { '@type': 'Person', name: site.guide.name, jobTitle: site.guide.role },
+    founder: { '@type': 'Person', name: about.guideName, jobTitle: about.guideRole },
     ...(sameAs.length ? { sameAs } : {}),
   };
   return (
