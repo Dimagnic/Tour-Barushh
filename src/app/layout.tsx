@@ -14,6 +14,7 @@ import { getGeneral, waDigits } from '@/lib/cms';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
+import { HideOnAdmin } from '@/components/HideOnAdmin';
 
 const description = 'Conoce Puebla y sus alrededores de la mano de guías locales: Cholula, pueblos mágicos, tours para grupos y transporte seguro.';
 export const metadata: Metadata = {
@@ -45,11 +46,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100000] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:font-bold">Saltar al contenido</a>
-        <Header whatsapp={g.whatsapp} reserveMessage={g.reserveMessage} />
+        <HideOnAdmin><Header whatsapp={g.whatsapp} reserveMessage={g.reserveMessage} /></HideOnAdmin>
         <main id="main">{children}</main>
-        <Footer />
-        <FloatingActions wa={waDigits(g.whatsapp)} msg={g.floatingMessage} topLabel="Volver arriba" />
-        {g.clienteaiToken ? <Script src="https://clienteai.site/widget.js" data-token={g.clienteaiToken} strategy="afterInteractive" /> : null}
+        <HideOnAdmin>
+          <Footer />
+          <FloatingActions wa={waDigits(g.whatsapp)} msg={g.floatingMessage} topLabel="Volver arriba" />
+          {g.clienteaiToken ? <Script src="https://clienteai.site/widget.js" data-token={g.clienteaiToken} strategy="afterInteractive" /> : null}
+        </HideOnAdmin>
       </body>
     </html>
   );

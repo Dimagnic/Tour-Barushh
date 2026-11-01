@@ -72,6 +72,11 @@ const loadRows = cache(async (): Promise<Record<string, unknown>> => {
   }
 });
 
+/** Lo guardado combinado con los valores por defecto (lo usa el panel para mostrar el formulario). */
+export function withDefaults<K extends ContentKey>(key: K, saved: unknown): Content[K] {
+  return merge(defaults[key], saved);
+}
+
 export async function getContent<K extends ContentKey>(key: K): Promise<Content[K]> {
   const rows = await loadRows();
   return merge(defaults[key], rows[key]);

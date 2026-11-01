@@ -1,4 +1,6 @@
 const dev = process.env.NODE_ENV !== 'production';
+// Origen de Supabase (panel de administración: inicio de sesión desde el navegador)
+const supabase = (() => { try { return new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').origin; } catch { return ''; } })();
 // Política de contenido: scripts solo del propio sitio y de ClienteAI (widget de chat).
 // Conexiones, imágenes y marcos se permiten por https para no romper el widget.
 const csp = [
@@ -7,7 +9,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https:",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https:",
-  `connect-src 'self' https: wss:${dev ? ' ws:' : ''}`,
+  `connect-src 'self' https: wss:${supabase ? ` ${supabase}` : ''}${dev ? ' ws:' : ''}`,
   "frame-src https:",
   "media-src 'self' https:",
   "object-src 'none'",
