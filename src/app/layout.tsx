@@ -16,6 +16,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
 import { HideOnAdmin } from '@/components/HideOnAdmin';
+import { AdminButton } from '@/components/AdminButton';
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getContent('seo');
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HideOnAdmin>
           <Footer />
           <FloatingActions wa={waDigits(g.whatsapp)} msg={g.floatingMessage} topLabel="Volver arriba" />
+          <AdminButton />
           {g.clienteaiToken ? <Script src="https://clienteai.site/widget.js" data-token={g.clienteaiToken} strategy="afterInteractive" /> : null}
         </HideOnAdmin>
       </body>
