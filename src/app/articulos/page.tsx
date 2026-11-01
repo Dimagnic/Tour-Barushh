@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Photo } from '@/components/Photo';
 import { articles } from '@/data/articles';
-import { wa } from '@/data/site';
+import { getGeneral, waLink } from '@/lib/cms';
 import { goldBtn, h2, label, wrap } from '@/lib/ui';
 
 export const metadata: Metadata = {
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: '/articulos' },
 };
 
-export default function Articulos() {
+export default async function Articulos() {
+  const g = await getGeneral();
+  const wa = waLink(g.whatsapp);
   const [first, ...rest] = articles;
   return (
     <>

@@ -19,6 +19,8 @@ const csp = [
 
 /** @type {import('next').NextConfig} */
 const config = {
+  // Fotos subidas desde el panel (Supabase Storage)
+  images: { remotePatterns: [{ protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/**' }] },
   async headers() {
     return [
       {

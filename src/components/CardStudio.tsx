@@ -10,7 +10,7 @@ const KEY = 'barushh-tarjeta-v2'; // v2: numero de WhatsApp nuevo (los datos gua
 type Info = { name: string; role: string; phone: string; email: string; web: string };
 type QrMode = 'web' | 'vcard' | 'whatsapp';
 
-const DEFAULTS: Info = { name: site.guide.name, role: site.guide.role, phone: site.whatsappDisplay, email: site.email, web: site.url.replace(/^https?:\/\//, '') };
+const BASE: Info = { name: site.guide.name, role: site.guide.role, phone: site.whatsappDisplay, email: site.email, web: site.url.replace(/^https?:\/\//, '') };
 const digits = (s: string) => { const d = s.replace(/\D/g, ''); return d.length === 10 ? `52${d}` : d; };
 
 function qrPayload(i: Info, mode: QrMode) {
@@ -93,7 +93,8 @@ async function drawBack(cv: HTMLCanvasElement, i: Info, mode: QrMode) {
 const toBlob = (cv: HTMLCanvasElement) => new Promise<Blob>((res) => cv.toBlob((b) => res(b!), 'image/png'));
 function save(blob: Blob, name: string) { const u = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); }
 
-export function CardStudio() {
+export function CardStudio({ phone, email }: { phone?: string; email?: string } = {}) {
+  const DEFAULTS: Info = { ...BASE, ...(phone ? { phone } : {}), ...(email ? { email } : {}) };
   const front = useRef<HTMLCanvasElement>(null);
   const back = useRef<HTMLCanvasElement>(null);
   const [info, setInfo] = useState<Info>(DEFAULTS);

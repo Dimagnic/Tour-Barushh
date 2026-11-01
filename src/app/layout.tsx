@@ -10,6 +10,7 @@ import '@fontsource/dm-sans/600.css';
 import '@fontsource/caveat/500.css';
 import './globals.css';
 import { site } from '@/data/site';
+import { getGeneral, waDigits } from '@/lib/cms';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { FloatingActions } from '@/components/FloatingActions';
@@ -23,17 +24,19 @@ export const metadata: Metadata = {
   openGraph: { title: 'Tour Barushh, guías de turismo en Puebla', description, type: 'website', siteName: site.name, locale: 'es_MX', images: ['/brand/logo.webp'] },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const sameAs = Object.values(site.social).filter(Boolean);
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const g = await getGeneral();
+  const phone = `+${waDigits(g.whatsapp)}`;
+  const sameAs = Object.values(g.social).filter(Boolean);
   const ld = {
     '@context': 'https://schema.org', '@type': 'TravelAgency', '@id': `${site.url}/#agencia`,
     name: site.name, url: site.url, description, inLanguage: 'es-MX',
     logo: `${site.url}/brand/logo.webp`, image: `${site.url}/brand/logo.webp`,
-    telephone: `+${site.whatsapp}`,
-    ...(site.email ? { email: site.email } : {}),
+    telephone: phone,
+    ...(g.email ? { email: g.email } : {}),
     address: { '@type': 'PostalAddress', addressLocality: 'Puebla', addressRegion: 'Puebla', addressCountry: 'MX' },
     areaServed: [{ '@type': 'City', name: 'Puebla' }, { '@type': 'City', name: 'Cholula' }, { '@type': 'State', name: 'Puebla' }],
-    contactPoint: { '@type': 'ContactPoint', telephone: `+${site.whatsapp}`, contactType: 'reservations', availableLanguage: ['es'] },
+    contactPoint: { '@type': 'ContactPoint', telephone: phone, contactType: 'reservations', availableLanguage: ['es'] },
     founder: { '@type': 'Person', name: site.guide.name, jobTitle: site.guide.role },
     ...(sameAs.length ? { sameAs } : {}),
   };
@@ -42,11 +45,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100000] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:font-bold">Saltar al contenido</a>
-        <Header />
+        <Header whatsapp={g.whatsapp} reserveMessage={g.reserveMessage} />
         <main id="main">{children}</main>
         <Footer />
-        <FloatingActions wa={site.whatsapp} msg="Hola, quisiera información sobre sus tours en Puebla." topLabel="Volver arriba" />
-        <Script src="https://clienteai.site/widget.js" data-token={site.clienteaiToken} strategy="afterInteractive" />
+        <FloatingActions wa={waDigits(g.whatsapp)} msg={g.floatingMessage} topLabel="Volver arriba" />
+        {g.clienteaiToken ? <Script src="https://clienteai.site/widget.js" data-token={g.clienteaiToken} strategy="afterInteractive" /> : null}
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import { Icon } from '@/components/Icon';
 import { Torn } from '@/components/Torn';
 import { BellezaCatalog } from '@/components/BellezaCatalog';
 import { ExampleNote } from '@/components/ExampleNote';
-import { wa } from '@/data/site';
+import { getGeneral, waLink } from '@/lib/cms';
 import { ingredients } from '@/data/belleza';
 import { goldBtn, h2, label, wrap } from '@/lib/ui';
 
@@ -21,7 +21,9 @@ const pillars = [
 ];
 const steps = ['Elige tu producto en el catálogo.', 'Escríbenos por WhatsApp y confirmamos disponibilidad y precio.', 'Coordinamos la entrega o la recolección contigo.'];
 
-export default function Belleza() {
+export default async function Belleza() {
+  const g = await getGeneral();
+  const wa = waLink(g.whatsapp);
   return (
     <>
       <section className="relative overflow-hidden bg-[#06182a] pb-24 pt-40 text-white">
@@ -55,7 +57,7 @@ export default function Belleza() {
           <p className={`${label} text-brown`}>Catálogo</p>
           <h2 className={h2}>Nuestros productos</h2>
           <ExampleNote className="mt-4" />
-          <div className="mt-8"><BellezaCatalog /></div>
+          <div className="mt-8"><BellezaCatalog whatsapp={g.whatsapp} /></div>
         </div>
       </section>
 

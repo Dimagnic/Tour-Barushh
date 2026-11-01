@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Photo, getPhoto } from '@/components/Photo';
 import { articles, getArticle, slugify } from '@/data/articles';
-import { site, wa } from '@/data/site';
+import { site } from '@/data/site';
+import { getGeneral, waLink } from '@/lib/cms';
 import { goldBtn, label } from '@/lib/ui';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -26,6 +27,8 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const a = getArticle(slug);
   if (!a) notFound();
+  const g = await getGeneral();
+  const wa = waLink(g.whatsapp);
   const heads = a.blocks.filter((b): b is { h: string } => 'h' in b);
   const related = articles.filter((x) => x.slug !== a.slug).slice(0, 3);
   const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.excerpt, inLanguage: 'es', image: `${site.url}${getPhoto(a.cover).src}`, author: { '@type': 'Organization', name: site.name }, publisher: { '@type': 'Organization', name: site.name } };

@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { categories, products } from '@/data/belleza';
-import { wa } from '@/data/site';
+import { waLink } from '@/lib/wa';
 import { ProductArt } from './ProductArt';
 
-export function BellezaCatalog() {
+export function BellezaCatalog({ whatsapp }: { whatsapp: string }) {
+  const wa = waLink(whatsapp);
   const [cat, setCat] = useState<string>('Todos');
   const list = cat === 'Todos' ? products : products.filter((p) => p.category === cat);
   return (

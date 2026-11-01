@@ -5,12 +5,15 @@ import { Carousel } from '@/components/Carousel';
 import { CurvedArrow, Leaves, Mandala, MountainMark, Stamp } from '@/components/Ornaments';
 import { Torn } from '@/components/Torn';
 import { VideoModal } from '@/components/VideoModal';
-import { site, wa } from '@/data/site';
+import { site } from '@/data/site';
+import { getGeneral, waLink } from '@/lib/cms';
 import { ctaList, essence, experiences, gallery, heroFeatures, living, testimonials } from '@/data/content';
 import { darkBtn as dark, goldBtn as gold, h2Home as h2, label, wrap } from '@/lib/ui';
 
-export default function Home() {
-  const reserve = wa('Hola, quiero reservar una experiencia con Tour Barushh.');
+export default async function Home() {
+  const g = await getGeneral();
+  const wa = waLink(g.whatsapp);
+  const reserve = wa(g.reserveMessage);
   return (
     <>
       {/* PORTADA */}

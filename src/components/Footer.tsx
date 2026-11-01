@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { nav, site } from '@/data/site';
+import { getGeneral, waDigits } from '@/lib/cms';
 import { experiences } from '@/data/content';
 
 const icons: Record<string, React.ReactNode> = {
@@ -10,7 +11,9 @@ const icons: Record<string, React.ReactNode> = {
   youtube: <g fill="none" stroke="currentColor" strokeWidth="1.800"><path d="M3 8c0-2 1-3 3-3h12c2 0 3 1 3 3v8c0 2-1 3-3 3H6c-2 0-3-1-3-3z" /><path d="M10 9.500v5l4.500-2.500z" fill="currentColor" /></g>,
 };
 
-export function Footer() {
+export async function Footer() {
+  const g = await getGeneral();
+  const social: Record<string, string> = g.social;
   const head = 'mb-5 text-sm font-bold uppercase tracking-[0.14em] text-gold';
   const link = 'block py-1.5 hover:text-white';
   return (
@@ -19,12 +22,12 @@ export function Footer() {
         <div>
           <Image src="/brand/logo-badge.png" alt="Tour Barushh, guías de turismo en Puebla" width={112} height={112} className="size-28" />
           <p className="mt-5 max-w-xs leading-relaxed">Guías de turismo en Puebla, México: tours culturales, pueblos mágicos y viajes para grupos.</p>
-          <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-bold text-[#4ade80] hover:underline">WhatsApp: {site.whatsappDisplay}</a>
-          {site.email ? <a href={`mailto:${site.email}`} className="mt-1 block hover:text-white">{site.email}</a> : null}
-          {site.hours ? <p className="mt-1">{site.hours}</p> : null}
+          <a href={`https://wa.me/${waDigits(g.whatsapp)}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-bold text-[#4ade80] hover:underline">WhatsApp: {g.whatsapp}</a>
+          {g.email ? <a href={`mailto:${g.email}`} className="mt-1 block hover:text-white">{g.email}</a> : null}
+          {g.hours ? <p className="mt-1">{g.hours}</p> : null}
           <div className="mt-5 flex gap-3">
             {Object.keys(icons).map((k) => {
-              const url = site.social[k];
+              const url = social[k];
               const cls = 'grid size-10 place-items-center rounded-full border border-white/20';
               const svg = <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">{icons[k]}</svg>;
               return url ? (

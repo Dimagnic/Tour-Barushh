@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { nav, wa } from '@/data/site';
+import { nav } from '@/data/site';
+import { waLink } from '@/lib/wa';
 
 /**
  * Secciones de la pagina de inicio, en orden, y la pestana del menu que corresponde a cada una.
@@ -15,7 +16,7 @@ const SECTIONS: [id: string, href: string | null][] = [
 /** Linea de lectura: una seccion es la actual cuando su borde superior pasa por debajo del header (76px) mas un margen. */
 const READ_LINE = 120;
 
-export function Header() {
+export function Header({ whatsapp, reserveMessage }: { whatsapp: string; reserveMessage: string }) {
   const [solid, setSolid] = useState(false);
   const [current, setCurrent] = useState<string | null>('/');
   const path = usePathname();
@@ -86,7 +87,7 @@ export function Header() {
     if (window.location.pathname + window.location.hash !== href) window.history.pushState(null, '', href);
   };
 
-  const cta = wa('Hola, quiero reservar una experiencia con Tour Barushh.');
+  const cta = waLink(whatsapp)(reserveMessage);
   return (
     <header className={`fixed inset-x-0 top-0 z-[90] text-white transition-colors ${solid || path !== '/' ? 'border-b border-white/10 bg-ink/90 backdrop-blur' : 'bg-gradient-to-b from-black/45 to-transparent'}`}>
       <div className="mx-auto flex h-[76px] max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-8">
