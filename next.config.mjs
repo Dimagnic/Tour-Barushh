@@ -1,11 +1,11 @@
 const dev = process.env.NODE_ENV !== 'production';
 // Origen de Supabase (panel de administración: inicio de sesión desde el navegador)
 const supabase = (() => { try { return new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').origin; } catch { return ''; } })();
-// Política de contenido: scripts solo del propio sitio y de ClienteAI (widget de chat).
+// Política de contenido: scripts solo del propio sitio, de ClienteAI (widget de chat) y del traductor de Google (botón ES | EN).
 // Conexiones, imágenes y marcos se permiten por https para no romper el widget.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' https://clienteai.site https://*.clienteai.site${dev ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline' https://clienteai.site https://*.clienteai.site https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com${dev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline' https:",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https:",

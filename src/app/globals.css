@@ -37,3 +37,9 @@ summary::-webkit-details-marker { display: none; }
    El botón y la ventana del widget de ClienteAI se reposicionan aquí; la ventana abre por encima de la pila. */
 #cai-btn { bottom: 96px !important; }
 #cai-box { bottom: 296px !important; height: min(480px, calc(100vh - 316px)) !important; height: min(480px, calc(100svh - 316px)) !important; max-width: calc(100vw - 32px); }
+
+/* Traductor (botón ES | EN): se ocultan la barra, el globo de "texto original" y el resaltado de Google. */
+iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, .goog-tooltip,
+.VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-aZ2wEe-wOHMyf, .VIpgJd-yAWNEb-L7lbkb { display: none !important; }
+body { top: 0 !important; }
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q, font[style] { background: transparent !important; box-shadow: none !important; }

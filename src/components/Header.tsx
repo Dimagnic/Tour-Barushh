@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { nav } from '@/data/site';
 import { waLink } from '@/lib/wa';
+import { LangToggle } from '@/components/LangToggle';
 
 /**
  * Secciones de la pagina de inicio, en orden, y la pestana del menu que corresponde a cada una.
@@ -92,8 +93,8 @@ export function Header({ whatsapp, reserveMessage }: { whatsapp: string; reserve
     <header className={`fixed inset-x-0 top-0 z-[90] text-white transition-colors ${solid || path !== '/' ? 'border-b border-white/10 bg-ink/90 backdrop-blur' : 'bg-gradient-to-b from-black/45 to-transparent'}`}>
       <div className="mx-auto flex h-[76px] max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-8">
         <Link href="/" onClick={go('/')} className="leading-none" aria-label={'Tour Barushh, gu\u00edas de turismo'}>
-          <span className="block font-display text-[27px] uppercase tracking-tight">Tour Barushh</span>
-          <span className="mt-1 block text-[8px] font-medium uppercase tracking-[0.3em] text-white/80">Gu{'\u00ed'}as de turismo</span>
+          <span translate="no" className="notranslate block font-display text-[27px] uppercase tracking-tight">Tour Barushh</span>
+          <span className="mt-1 block text-[8px] font-medium uppercase tracking-[0.3em] text-white/80">{'Gu\u00edas de turismo'}</span>
         </Link>
         <nav aria-label="Principal" className="hidden items-center gap-6 2xl:gap-8 xl:flex">
           {nav.map(([href, label]) => (
@@ -101,6 +102,7 @@ export function Header({ whatsapp, reserveMessage }: { whatsapp: string; reserve
           ))}
         </nav>
         <div className="flex items-center gap-3">
+          <LangToggle />
           <a href={cta} target="_blank" rel="noopener noreferrer" className="hidden rounded-full bg-gold px-6 py-3 text-[14px] font-semibold text-ink hover:brightness-95 sm:block">Reserva tu experiencia {'\u2192'}</a>
           <details ref={menu} className="relative xl:hidden">
             <summary className="grid size-11 cursor-pointer list-none place-items-center rounded-full border border-white/40" aria-label={'Men\u00fa'}>
